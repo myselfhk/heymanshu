@@ -98,7 +98,7 @@ export default function Philosophy() {
   }, [])
 
   return (
-    <section id="philosophy" ref={sectionRef} className="philosophy">
+    <section id="philosophy" data-nav-theme="light" ref={sectionRef} className="philosophy">
       {/* Ambient teal glow — static, not animated */}
       <div className="philosophy__glow" aria-hidden="true" />
 

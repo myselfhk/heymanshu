@@ -1,7 +1,9 @@
 export default function Footer({ onNotifyClick, scrollTo }) {
-  const nav = (target) => (e) => {
-    e.preventDefault()
-    scrollTo?.(target)
+  const nav = (href, target) => (e) => {
+    if (scrollTo) {
+      e.preventDefault()
+      scrollTo(target)
+    }
   }
 
   return (
@@ -9,10 +11,10 @@ export default function Footer({ onNotifyClick, scrollTo }) {
 
       {/* Left: nav links */}
       <nav className="footer-strip__nav">
-        <a href="#manifesto" className="footer-strip__nav-link" onClick={nav('#manifesto')}>Work</a>
-        <a href="#shelf"     className="footer-strip__nav-link" onClick={nav('#shelf')}>The Shelf</a>
-        <a href="#narratives" className="footer-strip__nav-link" onClick={nav('#narratives')}>Narratives</a>
-        <a href="#team"      className="footer-strip__nav-link" onClick={nav('#team')}>About</a>
+        <a href="/#manifesto"  className="footer-strip__nav-link" onClick={nav('/#manifesto', '#manifesto')}>Work</a>
+        <a href="/#shelf"      className="footer-strip__nav-link" onClick={nav('/#shelf', '#shelf')}>The Shelf</a>
+        <a href="/#narratives" className="footer-strip__nav-link" onClick={nav('/#narratives', '#narratives')}>Narratives</a>
+        <a href="/about"       className="footer-strip__nav-link">About</a>
       </nav>
 
       {/* Centre: location + copyright */}

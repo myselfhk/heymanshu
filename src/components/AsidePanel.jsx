@@ -144,7 +144,7 @@ export default function AsidePanel({ open, onClose }) {
             marginBottom: 10,
           }}>
             Let's work<br />
-            <span style={{ fontStyle: 'italic' }}>together.</span>
+            <span style={{  }}>together.</span>
           </h2>
 
           <p style={{

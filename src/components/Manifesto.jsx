@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -11,7 +12,7 @@ const caseStudies = [
     tagline: 'Built the UI layer for a payments platform operating in a market where users had real reasons not to trust digital money.',
     tags: ['Fintech', 'UX Design', 'Trust Systems'],
     color: '#3D5A80',
-    href: '#',
+    href: '/work/woo',
   },
   {
     id: '02',
@@ -21,7 +22,7 @@ const caseStudies = [
     tagline: 'Redesigned the post-purchase relationship between Honda owners and their cars across a complex multi-screen portal.',
     tags: ['Automotive', 'Interaction Design', 'Portal'],
     color: '#2E6B5E',
-    href: '#',
+    href: '/work/honda',
   },
   {
     id: '03',
@@ -31,7 +32,7 @@ const caseStudies = [
     tagline: 'One button existed in 34 variations across the app. Built the shared language that stopped that from happening again.',
     tags: ['Fintech', 'Design Systems', 'Scale'],
     color: '#5A3F72',
-    href: '#',
+    href: '/work/paytm',
   },
   {
     id: '04',
@@ -41,7 +42,7 @@ const caseStudies = [
     tagline: 'A deep-focus tool that adapts to individual work rhythms without interrupting the tools teams already live inside.',
     tags: ['SaaS', 'UX Research', 'Mobile'],
     color: '#7C5E32',
-    href: '#',
+    href: null,
   },
 ]
 
@@ -51,6 +52,7 @@ export default function Manifesto() {
   const counterRef    = useRef(null)
   const studyInfoRef  = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const navigate = useNavigate()
 
   /* Animate left-column swap whenever active study changes */
   const activatePanel = useCallback((i) => {
@@ -112,6 +114,7 @@ export default function Manifesto() {
   return (
     <section
       id="manifesto"
+      data-nav-theme="light"
       ref={sectionRef}
       className="work-section"
     >
@@ -199,10 +202,16 @@ export default function Manifesto() {
                 <h3 className="work-panel__title">{study.title}</h3>
                 <p className="work-panel__tagline">{study.tagline}</p>
 
-                <a href={study.href} className="work-panel__link btn btn--ghost btn--ghost-dark">
-                  <span className="btn__text">Case Study</span>
-                  <span className="btn__arrow">→</span>
-                </a>
+                {study.href && (
+                  <a
+                    href={study.href}
+                    className="work-panel__link btn btn--ghost btn--ghost-dark"
+                    onClick={(e) => { e.preventDefault(); navigate(study.href) }}
+                  >
+                    <span className="btn__text">Case Study</span>
+                    <span className="btn__arrow">→</span>
+                  </a>
+                )}
               </div>
             </article>
           ))}

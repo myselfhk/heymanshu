@@ -202,7 +202,7 @@ export default function Shelf() {
   }, [])
 
   return (
-    <section id="shelf" ref={sectionRef} className="shelf">
+    <section id="shelf" data-nav-theme="dark" ref={sectionRef} className="shelf">
 
       {/* ── Entry diagonal — same rotate(-3deg) pattern as Team / Jobs ── */}
       <div className="shelf__entry-diagonal" aria-hidden="true" />

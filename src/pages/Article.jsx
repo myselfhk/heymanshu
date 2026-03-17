@@ -6,6 +6,7 @@ import Lenis from 'lenis'
 import { ARTICLES } from '../data/articles'
 import InnerHeader from '../components/InnerHeader'
 import AsidePanel from '../components/AsidePanel'
+import Footer from '../components/Footer'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -58,23 +59,25 @@ export default function Article() {
   if (!article) return null
 
   return (
-    <div ref={pageRef} style={{ background:'#0E0E0E', minHeight:'100vh', color:'white', fontFamily:"'DM Sans',sans-serif", overflowX:'hidden' }}>
+    <div ref={pageRef} style={{ background:'#F7F4EF', minHeight:'100vh', color:'#0E0E0E', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
       <InnerHeader onNotifyClick={() => setPanelOpen(true)} />
       <AsidePanel open={panelOpen} onClose={() => setPanelOpen(false)} />
 
       {/* ── HERO ── */}
-      <section style={{
+      <section
+        data-nav-theme="dark"
+        style={{
         padding:'160px 80px 80px', position:'relative', overflow:'hidden',
-        background:'#0E0E0E', borderBottom:'1px solid rgba(255,255,255,0.06)',
+        background:'#F7F4EF', borderBottom:'1px solid rgba(0,0,0,0.07)',
       }}>
-        <div style={{position:'absolute',inset:0,opacity:0.04,backgroundImage:NOISE_SVG,backgroundSize:180,mixBlendMode:'overlay',pointerEvents:'none'}} />
+        <div style={{position:'absolute',inset:0,opacity:0.03,backgroundImage:NOISE_SVG,backgroundSize:180,mixBlendMode:'multiply',pointerEvents:'none'}} />
 
         <div className="article__hero-meta" style={{opacity:0,display:'flex',gap:24,alignItems:'center',marginBottom:40,position:'relative',zIndex:1}}>
-          <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C'}}>{article.tag}</span>
-          <span style={{width:4,height:4,borderRadius:'50%',background:'rgba(255,255,255,0.15)'}} />
-          <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)'}}>{article.date}</span>
-          <span style={{width:4,height:4,borderRadius:'50%',background:'rgba(255,255,255,0.15)'}} />
-          <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)'}}>{article.readTime} read</span>
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C'}}>{article.tag}</span>
+          <span style={{width:4,height:4,borderRadius:'50%',background:'rgba(0,0,0,0.15)'}} />
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(0,0,0,0.4)'}}>{article.date}</span>
+          <span style={{width:4,height:4,borderRadius:'50%',background:'rgba(0,0,0,0.15)'}} />
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(0,0,0,0.4)'}}>{article.readTime} read</span>
         </div>
 
         <h1 className="article__hero-headline" style={{opacity:0,position:'relative',zIndex:1}}>
@@ -104,31 +107,33 @@ export default function Article() {
       {/* ── MORE WRITING ── */}
       {otherArticles.length > 0 && (
         <div style={{
-          borderTop:'1px solid rgba(255,255,255,0.06)',
+          borderTop:'1px solid rgba(0,0,0,0.07)',
           padding:'80px 80px 120px',
           maxWidth:'calc(680px + 160px)',
           margin:'0 auto',
         }}>
-          <div style={{fontFamily:"'Syne',sans-serif",fontSize:11,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(255,255,255,0.2)',marginBottom:40}}>More Writing</div>
+          <div style={{fontFamily:"var(--font-base)",fontSize:11,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(0,0,0,0.3)',marginBottom:40}}>More Writing</div>
           {otherArticles.map((a) => (
             <div
               key={a.slug}
               onClick={() => navigate(`/writing/${a.slug}`)}
               style={{
                 display:'flex',justifyContent:'space-between',alignItems:'center',
-                padding:'24px 0', borderBottom:'1px solid rgba(255,255,255,0.06)',
+                padding:'24px 0', borderBottom:'1px solid rgba(0,0,0,0.07)',
                 cursor:'pointer', gap:32,
               }}
             >
               <div>
-                <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C',display:'block',marginBottom:8}}>{a.tag}</span>
-                <h4 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:22,fontWeight:300,color:'white',lineHeight:1.2,letterSpacing:'-0.01em'}}>{a.title}</h4>
+                <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C',display:'block',marginBottom:8}}>{a.tag}</span>
+                <h4 style={{fontFamily:"var(--font-base)",fontSize:22,fontWeight:300,color:'#0E0E0E',lineHeight:1.2,letterSpacing:'-0.01em'}}>{a.title}</h4>
               </div>
-              <span style={{color:'rgba(255,255,255,0.2)',fontSize:18,flexShrink:0}}>→</span>
+              <span style={{color:'rgba(0,0,0,0.25)',fontSize:18,flexShrink:0}}>→</span>
             </div>
           ))}
         </div>
       )}
+
+      <Footer />
     </div>
   )
 }

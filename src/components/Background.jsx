@@ -9,9 +9,7 @@ const layers = [
   { color: '#0A1F1F', trigger: '#philosophy' },   // 2: dark teal - philosophy quote
   { color: '#F7F4EF', trigger: '#shelf' },        // 3: off-white - the shelf
   { color: '#0E0E0E', trigger: '#narratives' },   // 4: dark  - narratives pitch deck
-  { color: '#f5f5f5', trigger: '#team' },         // 5: light - team
-  { color: '#161616', trigger: '#news' },         // 6: dark  - news
-  { color: '#f5f5f5', trigger: '#jobs' },         // 7: light - jobs
+  { color: '#161616', trigger: '#news' },         // 5: dark  - news/writing
 ]
 
 export default function Background() {

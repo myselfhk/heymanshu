@@ -1,13 +1,43 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-/* Header for inner pages — same visual as homepage header,
-   but nav links go to homepage sections via hash navigation
-   and the theme is always 'light' (white text on dark bg). */
+/* Header for inner pages — always transparent, uses IntersectionObserver
+   to adapt colour based on [data-nav-theme] sections.
+   Inner pages are all light-bg, so default theme is "dark" (dark text). */
 export default function InnerHeader({ onNotifyClick }) {
   const headerRef = useRef(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
+
+  /* ── IntersectionObserver for theme ── */
+  useEffect(() => {
+    const header = headerRef.current
+    if (!header) return
+
+    // Inner pages default to dark-text (light bg)
+    header.dataset.theme = 'dark'
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            header.dataset.theme = entry.target.dataset.navTheme || 'dark'
+          }
+        })
+      },
+      { rootMargin: '0px 0px -85% 0px' }
+    )
+
+    document.querySelectorAll('[data-nav-theme]').forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  /* ── Close menu on scroll ── */
+  useEffect(() => {
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false) }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [menuOpen])
 
   const navLinks = [
     { label: 'Work',       href: '/#manifesto' },
@@ -57,6 +87,7 @@ export default function InnerHeader({ onNotifyClick }) {
       <header
         ref={headerRef}
         className="header"
+        data-theme="dark"
         style={{
           position: 'fixed',
           top: 0,
@@ -80,14 +111,8 @@ export default function InnerHeader({ onNotifyClick }) {
           {/* Logo LEFT */}
           <Link
             to="/"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              textDecoration: 'none',
-              flexShrink: 0,
-              color: menuOpen ? '#fff' : '#ffffff',
-              transition: 'color 0.6s cubic-bezier(0.32, 0.94, 0.6, 1)',
-            }}
+            className="header__logo"
+            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}
           >
             <svg
               width="140"
@@ -117,16 +142,9 @@ export default function InnerHeader({ onNotifyClick }) {
                   <li key={href} className="header__list-item">
                     <a
                       href={href}
+                      className="header__nav-link"
                       onClick={(e) => handleNavClick(e, href)}
-                      style={{
-                        fontSize: 18,
-                        fontWeight: 400,
-                        color: '#ffffff',
-                        opacity: 0.65,
-                        transition: 'opacity 0.3s',
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.opacity = '1' }}
-                      onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.65' }}
+                      style={{ fontSize: 18, fontWeight: 500 }}
                     >
                       {label}
                     </a>
@@ -138,7 +156,7 @@ export default function InnerHeader({ onNotifyClick }) {
             <div className="header__pill header__pill-desktop">
               <button
                 onClick={onNotifyClick}
-                className="btn btn--primary-dark"
+                className="btn header__cta-btn"
               >
                 <span className="btn__text">Let's Talk</span>
                 <span className="btn__arrow">→</span>
@@ -151,7 +169,6 @@ export default function InnerHeader({ onNotifyClick }) {
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
-              style={{ color: menuOpen ? '#fff' : '#fff' }}
             >
               <span />
               <span />

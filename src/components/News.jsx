@@ -79,6 +79,7 @@ export default function News() {
   return (
     <section
       id="news"
+      data-nav-theme="light"
       ref={sectionRef}
       className="writing-section"
     >

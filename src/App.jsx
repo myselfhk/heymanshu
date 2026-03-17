@@ -12,9 +12,7 @@ import Manifesto from './components/Manifesto'
 import Philosophy from './components/Philosophy'
 import Shelf from './components/Shelf'
 import Narratives from './components/Narratives'
-import Team from './components/Team'
 import News from './components/News'
-import Jobs from './components/Jobs'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 
@@ -23,7 +21,6 @@ gsap.registerPlugin(ScrollTrigger)
 function App() {
   const [loading, setLoading] = useState(true)
   const [panelOpen, setPanelOpen] = useState(false)
-  const [navTheme, setNavTheme] = useState('light')
   const lenisRef = useRef(null)
 
   useEffect(() => {
@@ -76,7 +73,6 @@ function App() {
         opacity: 0,
       }} />
       <Header
-        navTheme={navTheme}
         onNotifyClick={() => setPanelOpen(true)}
         scrollTo={scrollTo}
       />
@@ -88,9 +84,7 @@ function App() {
         <Philosophy />
         <Shelf />
         <Narratives />
-        <Team />
         <News />
-        <Jobs />
       </main>
       <CTA />
       <Footer onNotifyClick={() => setPanelOpen(true)} scrollTo={scrollTo} />

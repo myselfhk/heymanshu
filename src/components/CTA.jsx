@@ -85,7 +85,7 @@ export default function CTA() {
   }, [])
 
   return (
-    <section className="footer-cta" ref={sectionRef}>
+    <section className="footer-cta" data-nav-theme="light" ref={sectionRef}>
 
       {/* Availability status */}
       <div className="footer-cta__status">

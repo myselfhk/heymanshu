@@ -221,7 +221,7 @@ export default function Narratives() {
 
   /* ── Render ────────────────────────────────────────────── */
   return (
-    <section id="narratives" ref={sectionRef} className="narratives">
+    <section id="narratives" data-nav-theme="light" ref={sectionRef} className="narratives">
 
       {/* Entry diagonal — off-white bleeds into dark, same rotate(-3deg) pattern */}
       <div className="narratives__entry-diagonal" aria-hidden="true" />

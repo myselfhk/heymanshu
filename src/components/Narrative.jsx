@@ -82,7 +82,7 @@ export default function Narrative() {
   }, [])
 
   return (
-    <section className="narrative" ref={sectionRef} id="narrative">
+    <section className="narrative" ref={sectionRef} id="narrative" data-nav-theme="dark">
       <p className="narrative__label">What I Do</p>
 
       <p className="narrative__text">

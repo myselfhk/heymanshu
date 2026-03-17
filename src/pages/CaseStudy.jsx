@@ -6,6 +6,7 @@ import Lenis from 'lenis'
 import { CASE_STUDIES, PROJECT_ORDER } from '../data/caseStudies'
 import InnerHeader from '../components/InnerHeader'
 import AsidePanel from '../components/AsidePanel'
+import Footer from '../components/Footer'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -27,7 +28,7 @@ function PaytmPanelA() {
           }} />
         ))}
       </div>
-      <div style={{position:'absolute',bottom:24,left:32,fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',color:'rgba(255,255,255,0.25)',textTransform:'uppercase'}}>34 button variants</div>
+      <div style={{position:'absolute',bottom:24,left:32,fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',color:'rgba(255,255,255,0.25)',textTransform:'uppercase'}}>34 button variants</div>
     </div>
   )
 }
@@ -35,8 +36,8 @@ function PaytmPanelB() {
   return (
     <div className="cs__visual-panel cs__visual--paytm-b">
       <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:16}}>
-        <div style={{border:'1px solid #0A6B6B',borderRadius:40,padding:'14px 48px',fontFamily:"'Syne',sans-serif",fontSize:12,letterSpacing:'0.16em',textTransform:'uppercase',color:'#0A6B6B'}}>PAY NOW</div>
-        <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',color:'rgba(255,255,255,0.2)',textTransform:'uppercase'}}>1 button variant</span>
+        <div style={{border:'1px solid #0A6B6B',borderRadius:40,padding:'14px 48px',fontFamily:"var(--font-base)",fontSize:12,letterSpacing:'0.16em',textTransform:'uppercase',color:'#0A6B6B'}}>PAY NOW</div>
+        <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',color:'rgba(255,255,255,0.2)',textTransform:'uppercase'}}>1 button variant</span>
       </div>
     </div>
   )
@@ -58,7 +59,7 @@ function HondaPanelA() {
                 border: node.active ? '2px solid #0A6B6B' : node.done ? '2px solid rgba(255,255,255,0.35)' : '2px solid rgba(255,255,255,0.15)',
                 flexShrink:0,
               }} />
-              <span style={{fontFamily:"'Syne',sans-serif",fontSize:9,letterSpacing:'0.1em',textTransform:'uppercase',color: node.active ? '#B8973C' : 'rgba(255,255,255,0.3)',whiteSpace:'nowrap',textAlign:'center'}}>{node.label}</span>
+              <span style={{fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.1em',textTransform:'uppercase',color: node.active ? '#B8973C' : 'rgba(255,255,255,0.3)',whiteSpace:'nowrap',textAlign:'center'}}>{node.label}</span>
             </div>
             {i < nodes.length - 1 && <div style={{flex:1,height:1,background:'rgba(255,255,255,0.1)',margin:'0 4px',marginBottom:20}} />}
           </div>
@@ -71,17 +72,17 @@ function HondaPanelB() {
   return (
     <div className="cs__visual-panel cs__visual--honda-b">
       <div style={{background:'#0A2020',border:'1px solid rgba(255,255,255,0.08)',borderRadius:12,padding:'28px 32px',minWidth:260}}>
-        <div style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:16}}>Service Complete</div>
+        <div style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:16}}>Service Complete</div>
         {[['Oil Change','Rs. 800'],['Air Filter','Rs. 450'],['Labour','Rs. 600']].map(([item,price],i) => (
-          <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:'1px solid rgba(255,255,255,0.05)',fontFamily:"'DM Sans',sans-serif",fontSize:13,color:'rgba(255,255,255,0.55)'}}>
+          <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:'1px solid rgba(255,255,255,0.05)',fontFamily:"var(--font-base)",fontSize:13,color:'rgba(255,255,255,0.55)'}}>
             <span>{item}</span><span>{price}</span>
           </div>
         ))}
         <div style={{display:'flex',justifyContent:'space-between',paddingTop:16,marginTop:4}}>
-          <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(255,255,255,0.3)'}}>Total</span>
-          <span style={{fontFamily:"'Cormorant Garamond',serif",fontSize:28,fontWeight:300,color:'white'}}>Rs. 1,850</span>
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(255,255,255,0.3)'}}>Total</span>
+          <span style={{fontFamily:"var(--font-base)",fontSize:28,fontWeight:300,color:'white'}}>Rs. 1,850</span>
         </div>
-        <div style={{marginTop:20,border:'1px solid #0A6B6B',borderRadius:40,padding:'10px 24px',display:'flex',justifyContent:'center',fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#0A6B6B',cursor:'pointer'}}>Share on WhatsApp</div>
+        <div style={{marginTop:20,border:'1px solid #0A6B6B',borderRadius:40,padding:'10px 24px',display:'flex',justifyContent:'center',fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#0A6B6B',cursor:'pointer'}}>Share on WhatsApp</div>
       </div>
     </div>
   )
@@ -90,11 +91,11 @@ function WooPanelA() {
   return (
     <div className="cs__visual-panel cs__visual--woo-a">
       <div style={{border:'2px solid rgba(255,255,255,0.12)',borderRadius:24,padding:'28px 24px',width:220,background:'rgba(0,0,0,0.3)'}}>
-        <div style={{fontFamily:"'Syne',sans-serif",fontSize:9,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:16,textAlign:'center'}}>Transaction Confirmed</div>
-        <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:300,color:'white',textAlign:'center',marginBottom:8}}>₦ 12,500</div>
-        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:'rgba(255,255,255,0.4)',textAlign:'center',marginBottom:4}}>To: Amaka Okonkwo</div>
-        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:'rgba(255,255,255,0.25)',textAlign:'center',marginBottom:20}}>REF: WOO-2311-4892</div>
-        <div style={{border:'1px solid #B8973C',borderRadius:40,padding:'10px 20px',fontFamily:"'Syne',sans-serif",fontSize:9,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C',textAlign:'center'}}>Share Receipt</div>
+        <div style={{fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:16,textAlign:'center'}}>Transaction Confirmed</div>
+        <div style={{fontFamily:"var(--font-base)",fontSize:36,fontWeight:300,color:'white',textAlign:'center',marginBottom:8}}>₦ 12,500</div>
+        <div style={{fontFamily:"var(--font-base)",fontSize:12,color:'rgba(255,255,255,0.4)',textAlign:'center',marginBottom:4}}>To: Amaka Okonkwo</div>
+        <div style={{fontFamily:"var(--font-base)",fontSize:11,color:'rgba(255,255,255,0.25)',textAlign:'center',marginBottom:20}}>REF: WOO-2311-4892</div>
+        <div style={{border:'1px solid #B8973C',borderRadius:40,padding:'10px 20px',fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C',textAlign:'center'}}>Share Receipt</div>
       </div>
     </div>
   )
@@ -112,12 +113,12 @@ function WooPanelB() {
       <div style={{width:'100%',padding:'0 24px'}}>
         {txns.map((t,i) => (
           <div key={i} style={{display:'flex',alignItems:'center',gap:12,padding:'10px 0',borderBottom:'1px solid rgba(255,255,255,0.04)'}}>
-            <div style={{width:32,height:32,borderRadius:'50%',background:t.color,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'Syne',sans-serif",fontSize:10,color:'white',flexShrink:0}}>{t.init}</div>
+            <div style={{width:32,height:32,borderRadius:'50%',background:t.color,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"var(--font-base)",fontSize:10,color:'white',flexShrink:0}}>{t.init}</div>
             <div style={{flex:1}}>
-              <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:'rgba(255,255,255,0.65)'}}>{t.name}</div>
-              <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:'rgba(255,255,255,0.25)'}}>{t.time}</div>
+              <div style={{fontFamily:"var(--font-base)",fontSize:13,color:'rgba(255,255,255,0.65)'}}>{t.name}</div>
+              <div style={{fontFamily:"var(--font-base)",fontSize:11,color:'rgba(255,255,255,0.25)'}}>{t.time}</div>
             </div>
-            <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:18,fontWeight:300,color:'white'}}>{t.amount}</div>
+            <div style={{fontFamily:"var(--font-base)",fontSize:18,fontWeight:300,color:'white'}}>{t.amount}</div>
           </div>
         ))}
       </div>
@@ -209,10 +210,10 @@ function NextProjectCard({ slug }) {
       {/* Noise overlay */}
       <div style={{position:'absolute',inset:0,opacity:0.04,backgroundImage:NOISE_SVG,backgroundSize:180,mixBlendMode:'overlay',pointerEvents:'none'}} />
       <div style={{position:'relative',zIndex:1}}>
-        <div style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(255,255,255,0.3)',marginBottom:16}}>
+        <div style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(255,255,255,0.3)',marginBottom:16}}>
           {project.company} · {project.discipline}
         </div>
-        <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:'clamp(28px,3vw,44px)',fontWeight:300,lineHeight:1.05,color:'white',letterSpacing:'-0.02em'}}>
+        <div style={{fontFamily:"var(--font-base)",fontSize:'clamp(28px,3vw,44px)',fontWeight:300,lineHeight:1.05,color:'white',letterSpacing:'-0.02em'}}>
           {project.headline.map((line, i) => (
             <div key={i}>{i === project.headline.length - 1
               ? line.replace(project.headlineItalicWord, '').trim() + ' '
@@ -224,8 +225,8 @@ function NextProjectCard({ slug }) {
       <div style={{position:'relative',zIndex:1,display:'flex',gap:24}}>
         {project.stats.map((s,i) => (
           <div key={i}>
-            <div style={{fontFamily:"'Syne',sans-serif",fontSize:9,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',marginBottom:4}}>{s.label}</div>
-            <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:20,fontWeight:300,color:'white'}}>{s.value}</div>
+            <div style={{fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',marginBottom:4}}>{s.label}</div>
+            <div style={{fontFamily:"var(--font-base)",fontSize:20,fontWeight:300,color:'white'}}>{s.value}</div>
           </div>
         ))}
       </div>
@@ -347,13 +348,14 @@ export default function CaseStudy() {
   const nextProject = CASE_STUDIES[project.nextProject]
 
   return (
-    <div ref={pageRef} className="is-case-study" style={{ background:'#0E0E0E', minHeight:'100vh', color:'white', fontFamily:"'DM Sans',sans-serif", overflowX:'hidden' }}>
+    <div ref={pageRef} className="is-case-study" style={{ background:'#F7F4EF', minHeight:'100vh', color:'#0E0E0E', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
       <InnerHeader onNotifyClick={() => setPanelOpen(true)} />
       <AsidePanel open={panelOpen} onClose={() => setPanelOpen(false)} />
 
       {/* ── HERO ── */}
       <section
         className="cs__hero"
+        data-nav-theme="light"
         style={{
           minHeight: '100vh',
           display: 'grid',
@@ -446,10 +448,10 @@ export default function CaseStudy() {
       {/* ── IMPACT LIST ── */}
       <div className="cs__body" style={{paddingTop:80,paddingBottom:0}}>
         <div style={{paddingLeft:'calc(80px + 80px)',paddingBottom:80}}>
-          <div style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',marginBottom:24}}>Impact</div>
+          <div style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(0,0,0,0.3)',marginBottom:24}}>Impact</div>
           <ul style={{listStyle:'none',padding:0}}>
             {project.impact.map((item, i) => (
-              <li key={i} style={{fontFamily:"'DM Sans',sans-serif",fontSize:17,fontWeight:300,color:'rgba(255,255,255,0.65)',padding:'12px 0',borderBottom:'1px solid rgba(255,255,255,0.06)',display:'flex',alignItems:'center',gap:16}}>
+              <li key={i} style={{fontFamily:"var(--font-base)",fontSize:17,fontWeight:300,color:'rgba(0,0,0,0.6)',padding:'12px 0',borderBottom:'1px solid rgba(0,0,0,0.07)',display:'flex',alignItems:'center',gap:16}}>
                 <span style={{color:'#B8973C',fontSize:12}}>◆</span>
                 {item}
               </li>
@@ -477,7 +479,7 @@ export default function CaseStudy() {
                 </span>
               ))}
             </a>
-            <div style={{marginTop:16,fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(255,255,255,0.2)'}}>
+            <div style={{marginTop:16,fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(0,0,0,0.3)'}}>
               {nextProject.company} · {nextProject.discipline}
             </div>
           </div>
@@ -486,6 +488,8 @@ export default function CaseStudy() {
           </div>
         </div>
       )}
+
+      <Footer />
     </div>
   )
 }

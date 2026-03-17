@@ -1,0 +1,93 @@
+/* ─────────────────────────────────────────────────────────────
+   DEGULAR DISPLAY — 4 weights, roman + italic
+   Optical size: designed for large display use (40px+)
+   Source: OH no Type Company
+───────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Degular Display';
+  src: url('/fonts/degular/degulardisplay-regular-webfont.woff2') format('woff2'),
+       url('/fonts/degular/degulardisplay-regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular Display';
+  src: url('/fonts/degular/degulardisplay-regularitalic-webfont.woff2') format('woff2'),
+       url('/fonts/degular/degulardisplay-regularitalic-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular Display';
+  src: url('/fonts/degular/degulardisplay-medium-webfont.woff2') format('woff2'),
+       url('/fonts/degular/degulardisplay-medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular Display';
+  src: url('/fonts/degular/degulardisplay-mediumitalic-webfont.woff2') format('woff2'),
+       url('/fonts/degular/degulardisplay-mediumitalic-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular Display';
+  src: url('/fonts/degular/degulardisplay-semibold-webfont.woff2') format('woff2'),
+       url('/fonts/degular/degulardisplay-semibold-webfont.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular Display';
+  src: url('/fonts/degular/degulardisplay-semibolditalic-webfont.woff2') format('woff2'),
+       url('/fonts/degular/degulardisplay-semibolditalic-webfont.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular Display';
+  src: url('/fonts/degular/degulardisplay-bold-webfont.woff2') format('woff2'),
+       url('/fonts/degular/degulardisplay-bold-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular Display';
+  src: url('/fonts/degular/degulardisplay-bolditalic-webfont.woff2') format('woff2'),
+       url('/fonts/degular/degulardisplay-bolditalic-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   VERYVOGUE DISPLAY ITALIC — 1 weight, display italic only
+   Source: Nicky Laatz
+   Role: accent font — replaces all italic usage site-wide
+───────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'VeryVogue';
+  src: url('/fonts/veryvogue/nicky-laatz-very-vogue-display-italic-webfont.woff2') format('woff2'),
+       url('/fonts/veryvogue/nicky-laatz-very-vogue-display-italic-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

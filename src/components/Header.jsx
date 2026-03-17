@@ -1,64 +1,43 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const navLinks = [
   { label: 'Work',       href: '#manifesto' },
   { label: 'The Shelf',  href: '#shelf' },
   { label: 'Narratives', href: '#narratives' },
   { label: 'Writing',    href: '#news' },
-  { label: 'About',      href: '#team' },
+  { label: 'About',      href: '/about' },
 ]
 
-export default function Header({ navTheme, onNotifyClick, scrollTo }) {
+export default function Header({ onNotifyClick, scrollTo }) {
   const headerRef = useRef(null)
-  const [theme, setTheme] = useState('light')
-  const [activeLink, setActiveLink] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
 
+  /* ── IntersectionObserver: watch [data-nav-theme] sections ── */
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const sections = [
-        { id: '#hero',       theme: 'light', link: '' },          // dark teal bg → white text
-        { id: '#narrative',  theme: 'dark',  link: '' },          // off-white bg → dark text
-        { id: '#manifesto',  theme: 'light', link: '#manifesto' },// dark bg → white text
-        { id: '#philosophy', theme: 'light', link: '' },          // dark bg → white text
-        { id: '#shelf',      theme: 'dark',  link: '#shelf' },    // off-white bg → dark text
-        { id: '#narratives', theme: 'light', link: '#narratives' },// dark bg → white text
-        { id: '#team',       theme: 'dark',  link: '#team' },     // light bg → dark text
-        { id: '#news',       theme: 'light', link: '#news' },     // dark bg → white text
-        { id: '#jobs',       theme: 'dark',  link: '#jobs' },     // light bg → dark text
-      ]
+    const header = headerRef.current
+    if (!header) return
 
-      sections.forEach(({ id, theme: sectionTheme, link }) => {
-        ScrollTrigger.create({
-          trigger: id,
-          start: 'top 50%',
-          end: 'bottom 50%',
-          onToggle: ({ isActive }) => {
-            if (isActive) {
-              setTheme(sectionTheme)
-              setActiveLink(link)
-            }
-          },
-        })
-      })
+    // Start with "light" (hero is dark bg = white nav text)
+    header.dataset.theme = 'light'
 
-      ScrollTrigger.create({
-        trigger: 'footer',
-        start: 'top 50%',
-        end: 'bottom bottom',
-        onToggle: ({ isActive }) => {
-          if (isActive) {
-            setTheme('light')
-            setActiveLink('')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            header.dataset.theme = entry.target.dataset.navTheme || 'light'
           }
-        },
-      })
-    })
-    return () => ctx.revert()
+        })
+      },
+      // Trigger when a section's top edge crosses the top 15% of the viewport
+      { rootMargin: '0px 0px -85% 0px' }
+    )
+
+    document.querySelectorAll('[data-nav-theme]').forEach(el => observer.observe(el))
+    return () => observer.disconnect()
   }, [])
 
+  /* ── Entry animations ── */
   useEffect(() => {
     const items = headerRef.current?.querySelectorAll('.header__list-item')
     if (items) {
@@ -83,23 +62,22 @@ export default function Header({ navTheme, onNotifyClick, scrollTo }) {
     }
   }, [])
 
-  // Close menu on scroll
+  /* ── Close menu on scroll ── */
   useEffect(() => {
-    const handleScroll = () => {
-      if (menuOpen) setMenuOpen(false)
-    }
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false) }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [menuOpen])
 
   const handleNavClick = (href) => {
     setMenuOpen(false)
-    scrollTo(href)
+    // "/about" etc. are page routes, not hash scrolls
+    if (href.startsWith('/')) {
+      window.location.href = href
+    } else {
+      scrollTo(href)
+    }
   }
-
-  const isDark = theme === 'dark'
-  const textColor = isDark ? '#161616' : '#ffffff'
-  const pillBg = isDark ? '#161616' : 'rgba(0,0,0,0.3)'
 
   return (
     <>
@@ -131,6 +109,7 @@ export default function Header({ navTheme, onNotifyClick, scrollTo }) {
       <header
         ref={headerRef}
         className="header"
+        data-theme="light"
         style={{
           position: 'fixed',
           top: 0,
@@ -154,13 +133,9 @@ export default function Header({ navTheme, onNotifyClick, scrollTo }) {
           {/* Logo LEFT */}
           <a
             href="#hero"
+            className="header__logo"
             onClick={(e) => { e.preventDefault(); scrollTo('#hero') }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              textDecoration: 'none',
-              flexShrink: 0,
-            }}
+            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}
           >
             <svg
               width="140"
@@ -168,10 +143,6 @@ export default function Header({ navTheme, onNotifyClick, scrollTo }) {
               viewBox="0 0 169 28"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              style={{
-                color: menuOpen ? '#fff' : textColor,
-                transition: 'color 0.6s cubic-bezier(0.32, 0.94, 0.6, 1)',
-              }}
             >
               <path d="M2.84668 22.0625C4.26661 23.4068 6.34114 24.4882 8.88867 24.4883C10.1797 24.4883 11.5402 23.9307 12.8232 22.877L12.8916 22.8203L12.9688 22.8652C13.401 23.1139 13.8472 23.3371 14.3047 23.5342L14.4297 23.5879L14.3701 23.7119C13.9198 24.6514 13.5352 25.5886 13.2305 26.4873H7.39355C4.9224 26.4873 2.91272 24.5177 2.84668 22.0625ZM24.8223 23.2803C24.2495 25.1377 22.52 26.4872 20.4746 26.4873H16.2188C16.4377 25.8119 16.6998 25.1282 16.999 24.459L17.04 24.3662L17.1396 24.3848C18.0944 24.5614 19.1219 24.6504 20.1924 24.6504C22.0135 24.6504 23.5746 24.0941 24.8223 23.2803ZM24.2588 17.1758C24.5759 17.1758 24.8317 17.2739 25.0244 17.4287V19.4082C24.0881 20.6508 21.8145 21.9062 20.1104 21.9062C19.6062 21.9062 19.1074 21.8787 18.6299 21.8262L18.4199 21.8037L18.5361 21.625C20.3735 18.7979 22.4593 17.176 24.2588 17.1758ZM4.61914 17.249C6.36227 17.2491 7.6516 18.4559 9.14453 19.8525C9.5125 20.1967 9.89382 20.5524 10.3008 20.9102L10.4365 21.0303L10.2803 21.1221C9.53117 21.561 8.81786 21.7832 8.16016 21.7832C5.77227 21.7832 3.53711 19.5087 3.53711 18.4756C3.53732 17.8728 3.94215 17.249 4.61914 17.249ZM20.4746 1.13867C22.9873 1.13885 25.0244 3.17574 25.0244 5.68848V14.3555C24.8223 14.326 24.608 14.3086 24.3809 14.3086C21.6126 14.3087 18.4962 16.7636 15.8311 21.0439L15.7744 21.1367L15.6738 21.0957C15.5019 21.0252 15.3314 20.951 15.1631 20.8721L15.0078 20.7988L15.1191 20.668C17.3915 17.9716 18.748 14.6609 18.748 11.8125C18.7479 7.12891 16.039 5.89166 14.6064 5.8916C11.8225 5.8916 10.2257 8.04949 10.2256 11.8125C10.2256 14.9689 11.1035 16.9904 12.8359 17.8223C12.8793 17.7661 12.9229 17.7091 12.9658 17.6523L14.4775 15.1611C14.2825 15.1699 14.0829 15.09 13.8838 14.8818C13.3877 14.3626 12.8994 13.0711 12.9414 11.8086C13.0065 9.82832 13.6134 8.69238 14.6064 8.69238C15.4993 8.69274 16.1728 10.034 16.1729 11.8125C16.1729 13.7745 14.685 16.8495 12.6367 19.124L12.5557 19.2148L12.4609 19.1387C11.9257 18.7044 11.4209 18.2556 10.9326 17.8213C9.0437 16.1418 7.25909 14.5544 4.29297 14.4297C3.78106 14.4076 3.28967 14.5169 2.84375 14.7275V5.68848C2.84375 3.17563 4.88071 1.13867 7.39355 1.13867H20.4746Z" fill="currentColor"/>
               <path d="M35.5399 4.81641V12.7582H35.598C36.1799 10.2273 38.0126 8.88913 40.4853 8.88913C44.3835 8.88913 45.5471 11.4491 45.5471 14.3V22.6491H44.0053V14.591C44.0053 12.4673 43.1035 10.3146 40.1071 10.3146C37.2853 10.3146 35.5399 11.8855 35.5399 14.591V22.6491H33.998V4.81641H35.5399Z" fill="currentColor"/>
@@ -188,7 +159,7 @@ export default function Header({ navTheme, onNotifyClick, scrollTo }) {
 
           {/* Nav + CTA RIGHT */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
-            {/* Desktop nav (hidden on mobile via CSS) */}
+            {/* Desktop nav */}
             <nav className="header__nav-desktop" style={{ alignItems: 'center', gap: 30 }}>
               <ul style={{ display: 'flex', gap: 30, alignItems: 'center' }}>
                 {navLinks.map(({ label, href }) => (
@@ -199,16 +170,9 @@ export default function Header({ navTheme, onNotifyClick, scrollTo }) {
                   >
                     <a
                       href={href}
-                      onClick={(e) => { e.preventDefault(); scrollTo(href) }}
-                      style={{
-                        fontSize: 18,
-                        fontWeight: 400,
-                        color: activeLink === href ? 'var(--color-coral)' : textColor,
-                        opacity: activeLink === href ? 1 : 0.65,
-                        transition: 'color 0.6s cubic-bezier(0.32, 0.94, 0.6, 1), opacity 0.3s',
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.opacity = '1' }}
-                      onMouseLeave={(e) => { e.currentTarget.style.opacity = activeLink === href ? '1' : '0.65' }}
+                      className="header__nav-link"
+                      onClick={(e) => { e.preventDefault(); handleNavClick(href) }}
+                      style={{ fontSize: 18, fontWeight: 500 }}
                     >
                       {label}
                     </a>
@@ -216,24 +180,24 @@ export default function Header({ navTheme, onNotifyClick, scrollTo }) {
                 ))}
               </ul>
             </nav>
-            {/* Desktop CTA — oval, adapts with nav theme */}
+
+            {/* Desktop CTA */}
             <div className="header__pill header__pill-desktop" style={{ opacity: 0 }}>
               <button
                 onClick={onNotifyClick}
-                className={`btn ${isDark ? 'btn--primary-light' : 'btn--primary-dark'}`}
+                className="btn header__cta-btn"
               >
                 <span className="btn__text">Let's Talk</span>
                 <span className="btn__arrow">→</span>
               </button>
             </div>
 
-            {/* Mobile hamburger button */}
+            {/* Mobile hamburger */}
             <button
               className={`header__hamburger${menuOpen ? ' is-open' : ''}`}
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
-              style={{ color: menuOpen ? '#fff' : textColor }}
             >
               <span />
               <span />

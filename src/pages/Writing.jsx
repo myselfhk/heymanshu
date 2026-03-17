@@ -6,6 +6,7 @@ import Lenis from 'lenis'
 import { ARTICLES } from '../data/articles'
 import InnerHeader from '../components/InnerHeader'
 import AsidePanel from '../components/AsidePanel'
+import Footer from '../components/Footer'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -52,18 +53,18 @@ export default function Writing() {
   }, [panelOpen])
 
   return (
-    <div ref={pageRef} style={{ background:'#161616', minHeight:'100vh', color:'white', fontFamily:"'DM Sans',sans-serif", overflowX:'hidden' }}>
+    <div ref={pageRef} style={{ background:'#F7F4EF', minHeight:'100vh', color:'#0E0E0E', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
       <InnerHeader onNotifyClick={() => setPanelOpen(true)} />
       <AsidePanel open={panelOpen} onClose={() => setPanelOpen(false)} />
 
       {/* ── HEADER ── */}
       <div style={{ padding:'160px 80px 64px' }}>
-        <div style={{fontFamily:"'Syne',sans-serif",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',marginBottom:20}}>Writing</div>
+        <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(0,0,0,0.3)',marginBottom:20}}>Writing</div>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end'}}>
           <h1 className="writing__page-heading" style={{opacity:0}}>
             All essays.
           </h1>
-          <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:14,color:'rgba(255,255,255,0.35)'}}>
+          <p style={{fontFamily:"var(--font-base)",fontSize:14,color:'rgba(0,0,0,0.35)'}}>
             {ARTICLES.length} essays
           </p>
         </div>
@@ -77,21 +78,23 @@ export default function Writing() {
 
         {/* Ghost row — placeholder for future articles */}
         <div style={{
-          padding:'32px 0', border:'1px dashed rgba(255,255,255,0.08)',
+          padding:'32px 0', border:'1px dashed rgba(0,0,0,0.08)',
           borderLeft:'none', borderRight:'none', marginTop:0,
           display:'flex', alignItems:'center', gap:24,
           opacity:0.4,
         }}>
-          <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.16em',color:'rgba(255,255,255,0.2)',textTransform:'uppercase'}}>More coming</span>
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.16em',color:'rgba(0,0,0,0.25)',textTransform:'uppercase'}}>More coming</span>
         </div>
       </div>
 
       {/* ── FOOTER ── */}
-      <div style={{padding:'80px 80px 120px'}}>
-        <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:15,color:'rgba(255,255,255,0.25)'}}>
+      <div style={{padding:'80px 80px 64px'}}>
+        <p style={{fontFamily:"var(--font-base)",fontSize:15,color:'rgba(0,0,0,0.25)'}}>
           Writing when something needs to be said clearly.
         </p>
       </div>
+
+      <Footer />
     </div>
   )
 }
@@ -108,36 +111,36 @@ function ArticleRow({ article, navigate }) {
       style={{
         display:'grid', gridTemplateColumns:'60px 1fr auto',
         gap:'0 48px', padding:'36px 0',
-        borderBottom:'1px solid rgba(255,255,255,0.06)',
+        borderBottom:'1px solid rgba(0,0,0,0.07)',
         cursor:'pointer', opacity:0,
         transition:'background 0.3s',
       }}
     >
       {/* Num */}
-      <div style={{fontFamily:"'Syne',sans-serif",fontSize:11,fontWeight:600,letterSpacing:'0.16em',color:'rgba(255,255,255,0.2)',textTransform:'uppercase',paddingTop:4}}>{article.num}</div>
+      <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.16em',color:'rgba(0,0,0,0.2)',textTransform:'uppercase',paddingTop:4}}>{article.num}</div>
 
       {/* Content */}
       <div>
         <div style={{marginBottom:8,display:'flex',gap:16,alignItems:'center'}}>
-          <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C'}}>{article.tag}</span>
-          <span style={{fontFamily:"'Syne',sans-serif",fontSize:10,letterSpacing:'0.12em',textTransform:'uppercase',color:'rgba(255,255,255,0.2)'}}>{article.readTime} read</span>
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C'}}>{article.tag}</span>
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.12em',textTransform:'uppercase',color:'rgba(0,0,0,0.25)'}}>{article.readTime} read</span>
         </div>
         <h3 style={{
-          fontFamily:"'Cormorant Garamond',serif",
+          fontFamily:"var(--font-base)",
           fontSize:'clamp(20px,2.2vw,30px)',fontWeight:300,lineHeight:1.15,
-          color: hover ? 'rgba(255,255,255,0.85)' : 'white',
+          color: hover ? 'rgba(0,0,0,0.6)' : '#0E0E0E',
           letterSpacing:'-0.01em', marginBottom:12,
           transition:'color 0.3s',
         }}>{article.title}</h3>
-        <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:'rgba(255,255,255,0.4)',lineHeight:1.6,maxWidth:'60ch'}}>{article.excerpt}</p>
+        <p style={{fontFamily:"var(--font-base)",fontSize:15,fontWeight:300,color:'rgba(0,0,0,0.45)',lineHeight:1.6,maxWidth:'60ch'}}>{article.excerpt}</p>
       </div>
 
       {/* CTA */}
       <div style={{
         display:'flex', alignItems:'center', gap:8,
-        fontFamily:"'Syne',sans-serif", fontSize:11,
+        fontFamily:"var(--font-base)", fontSize:11,
         letterSpacing:'0.14em', textTransform:'uppercase',
-        color: hover ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.2)',
+        color: hover ? '#0E0E0E' : 'rgba(0,0,0,0.3)',
         transition:'color 0.3s', whiteSpace:'nowrap', alignSelf:'center',
       }}>
         <span>{article.date}</span>

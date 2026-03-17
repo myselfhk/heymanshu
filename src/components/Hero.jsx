@@ -218,6 +218,7 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
   return (
     <section
       id="hero"
+      data-nav-theme="light"
       ref={sectionRef}
       style={{
         height: '100dvh', minHeight: 600,
@@ -251,7 +252,7 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
           <SplitText text="Designer. Thinker." />
           <br />
           <SplitText text="Builder. " />
-          <span style={{ fontStyle: 'italic' }}><SplitText text="Human." /></span>
+          <span style={{  }}><SplitText text="Human." /></span>
         </h1>
 
         {/* Tagline + CTA — animate together */}
