@@ -1,0 +1,34 @@
+export default function Footer({ onNotifyClick, scrollTo }) {
+  const nav = (target) => (e) => {
+    e.preventDefault()
+    scrollTo?.(target)
+  }
+
+  return (
+    <footer className="footer-strip">
+
+      {/* Left: nav links */}
+      <nav className="footer-strip__nav">
+        <a href="#manifesto" className="footer-strip__nav-link" onClick={nav('#manifesto')}>Work</a>
+        <a href="#shelf"     className="footer-strip__nav-link" onClick={nav('#shelf')}>The Shelf</a>
+        <a href="#narratives" className="footer-strip__nav-link" onClick={nav('#narratives')}>Narratives</a>
+        <a href="#team"      className="footer-strip__nav-link" onClick={nav('#team')}>About</a>
+      </nav>
+
+      {/* Centre: location + copyright */}
+      <div className="footer-strip__location">
+        Built with intention · Jaipur, India<br />
+        © 2025 heymanshu
+      </div>
+
+      {/* Right: social + handle */}
+      <div className="footer-strip__social">
+        <a href="https://linkedin.com/in/itsheymanshu"  target="_blank" rel="noopener noreferrer" className="footer-strip__social-link">LinkedIn</a>
+        <a href="https://x.com/itsheymanshu"            target="_blank" rel="noopener noreferrer" className="footer-strip__social-link">X</a>
+        <a href="https://instagram.com/itsheymanshu"    target="_blank" rel="noopener noreferrer" className="footer-strip__social-link">Instagram</a>
+        <span className="footer-strip__handle">@itsheymanshu</span>
+      </div>
+
+    </footer>
+  )
+}
