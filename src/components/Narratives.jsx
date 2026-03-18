@@ -41,12 +41,12 @@ const MARQUEE_ITEMS = [
 function Slide1() {
   return (
     <>
-      <div className="narratives__slide-1-content">
-        <p className="narratives__slide-1-company">ACME CO.</p>
-        <div className="narratives__slide-1-rule" aria-hidden="true" />
-        <p className="narratives__slide-1-round">Pre-Seed · 2025</p>
+      <div className="Narratives__slide-1-content">
+        <p className="Narratives__slide-1-company">ACME CO.</p>
+        <div className="Narratives__slide-1-rule" aria-hidden="true" />
+        <p className="Narratives__slide-1-round">Pre-Seed · 2025</p>
       </div>
-      <span className="narratives__slide-1-mark" aria-hidden="true">hm</span>
+      <span className="Narratives__slide-1-mark" aria-hidden="true">hm</span>
     </>
   )
 }
@@ -54,19 +54,19 @@ function Slide1() {
 function Slide2() {
   return (
     <>
-      <span className="narratives__slide-2-ghost" aria-hidden="true">02</span>
-      <div className="narratives__slide-2-bar narratives__slide-2-bar--1" />
-      <div className="narratives__slide-2-bar narratives__slide-2-bar--2" />
-      <div className="narratives__slide-2-rect" />
+      <span className="Narratives__slide-2-ghost" aria-hidden="true">02</span>
+      <div className="Narratives__slide-2-bar Narratives__slide-2-bar--1" />
+      <div className="Narratives__slide-2-bar Narratives__slide-2-bar--2" />
+      <div className="Narratives__slide-2-rect" />
     </>
   )
 }
 
 function Slide3() {
   return (
-    <div className="narratives__slide-3-dots" aria-hidden="true">
+    <div className="Narratives__slide-3-dots" aria-hidden="true">
       {Array.from({ length: 9 }).map((_, i) => (
-        <div key={i} className="narratives__slide-3-dot" />
+        <div key={i} className="Narratives__slide-3-dot" />
       ))}
     </div>
   )
@@ -129,14 +129,14 @@ export default function Narratives() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const stMain = {
-        trigger:       '.narratives__main',
+        trigger:       '.Narratives__main',
         start:         'top 72%',
         toggleActions: 'play none none reverse',
       }
 
       /* Headline — line-by-line clip reveal */
       gsap.fromTo(
-        '.narratives__headline .line-inner',
+        '.Narratives__headline .line-inner',
         { y: '105%' },
         {
           y: '0%',
@@ -149,7 +149,7 @@ export default function Narratives() {
 
       /* Eyebrow — fades up first */
       gsap.fromTo(
-        '.narratives__eyebrow',
+        '.Narratives__eyebrow',
         { opacity: 0, y: 12 },
         {
           opacity: 1, y: 0,
@@ -161,7 +161,7 @@ export default function Narratives() {
 
       /* Subline — fades up after headline finishes */
       gsap.fromTo(
-        '.narratives__subline',
+        '.Narratives__subline',
         { opacity: 0, y: 16 },
         {
           opacity: 1, y: 0,
@@ -174,7 +174,7 @@ export default function Narratives() {
 
       /* Body + CTA — staggered after subline */
       gsap.fromTo(
-        ['.narratives__body', '.narratives__cta-btn'],
+        ['.Narratives__body', '.Narratives__cta-btn'],
         { opacity: 0, y: 20 },
         {
           opacity: 1, y: 0,
@@ -188,7 +188,7 @@ export default function Narratives() {
 
       /* Deck — enters from right with slight rotation */
       gsap.fromTo(
-        '.narratives__deck-wrapper',
+        '.Narratives__deck-wrapper',
         { opacity: 0, x: 60, rotation: -3 },
         {
           opacity: 1, x: 0, rotation: 0,
@@ -200,7 +200,7 @@ export default function Narratives() {
 
       /* Process steps — staggered fade-up */
       gsap.fromTo(
-        '.narratives__step',
+        '.Narratives__step',
         { opacity: 0, y: 24 },
         {
           opacity: 1, y: 0,
@@ -208,7 +208,7 @@ export default function Narratives() {
           stagger: 0.1,
           ease: 'cubic-bezier(0.32, 0.94, 0.6, 1)',
           scrollTrigger: {
-            trigger:       '.narratives__process',
+            trigger:       '.Narratives__process',
             start:         'top 80%',
             toggleActions: 'play none none reverse',
           },
@@ -221,21 +221,21 @@ export default function Narratives() {
 
   /* ── Render ────────────────────────────────────────────── */
   return (
-    <section id="narratives" data-nav-theme="light" ref={sectionRef} className="narratives">
+    <section id="Narratives" data-nav-theme="light" ref={sectionRef} className="Narratives">
 
       {/* Entry diagonal — off-white bleeds into dark, same rotate(-3deg) pattern */}
-      <div className="narratives__entry-diagonal" aria-hidden="true" />
+      <div className="Narratives__entry-diagonal" aria-hidden="true" />
 
       {/* ────────────────────────────────────────────────────
           LAYER 1 — Main split panel
       ──────────────────────────────────────────────────── */}
-      <div className="narratives__main">
+      <div className="Narratives__main">
 
         {/* Left: pitch */}
-        <div className="narratives__left">
-          <p className="narratives__eyebrow">Narratives · Pitch Deck Design</p>
+        <div className="Narratives__left">
+          <p className="Narratives__eyebrow">Narratives · Pitch Deck Design</p>
 
-          <h2 className="narratives__headline">
+          <h2 className="Narratives__headline">
             <span className="line-wrapper">
               <span className="line-inner">Raising money?</span>
             </span>
@@ -247,42 +247,42 @@ export default function Narratives() {
             </span>
           </h2>
 
-          <p className="narratives__subline">Most decks just describe it.</p>
+          <p className="Narratives__subline">Most Narratives just describe it.</p>
 
-          <p className="narratives__body">
+          <p className="Narratives__body">
             I build the visual argument for founders who are raising.<br />
             Starting at Rs. 20,000. Discovery call is free.
           </p>
 
-          <a href="/narratives" className="narratives__cta narratives__cta-btn btn btn--gold">
+          <a href="/Narratives" className="Narratives__cta Narratives__cta-btn btn btn--gold">
             <span className="btn__text">Let's Talk</span>
             <span className="btn__arrow">→</span>
           </a>
         </div>
 
         {/* Right: deck preview */}
-        <div className="narratives__right">
-          <div ref={deckRef} className="narratives__deck-wrapper">
+        <div className="Narratives__right">
+          <div ref={deckRef} className="Narratives__deck-wrapper">
             {/* Rendered back-to-front — slide 3 is behind */}
-            <div className="narratives__slide narratives__slide--3"><Slide3 /></div>
-            <div className="narratives__slide narratives__slide--2"><Slide2 /></div>
-            <div className="narratives__slide narratives__slide--1"><Slide1 /></div>
+            <div className="Narratives__slide Narratives__slide--3"><Slide3 /></div>
+            <div className="Narratives__slide Narratives__slide--2"><Slide2 /></div>
+            <div className="Narratives__slide Narratives__slide--1"><Slide1 /></div>
           </div>
-          <p className="narratives__deck-hint">hover to explore</p>
+          <p className="Narratives__deck-hint">hover to explore</p>
         </div>
       </div>
 
       {/* ────────────────────────────────────────────────────
           LAYER 2 — Marquee strip
       ──────────────────────────────────────────────────── */}
-      <div className="narratives__marquee-track" aria-hidden="true">
-        <div className="narratives__marquee-inner">
+      <div className="Narratives__marquee-track" aria-hidden="true">
+        <div className="Narratives__marquee-inner">
           {/* 3× repetition for seamless -33.33% loop */}
           {[0, 1, 2].flatMap((rep) =>
             MARQUEE_ITEMS.map((item, i) => (
-              <span key={`${rep}-${i}`} className="narratives__marquee-item">
+              <span key={`${rep}-${i}`} className="Narratives__marquee-item">
                 {item}
-                <span className="narratives__marquee-separator"> ◆ </span>
+                <span className="Narratives__marquee-separator"> ◆ </span>
               </span>
             ))
           )}
@@ -292,12 +292,12 @@ export default function Narratives() {
       {/* ────────────────────────────────────────────────────
           LAYER 3 — Process strip
       ──────────────────────────────────────────────────── */}
-      <div className="narratives__process">
+      <div className="Narratives__process">
         {STEPS.map((step, i) => (
-          <div key={i} className="narratives__step">
-            <p className="narratives__step-num">0{i + 1}</p>
-            <p className="narratives__step-title">{step.title}</p>
-            <p className="narratives__step-desc">{step.desc}</p>
+          <div key={i} className="Narratives__step">
+            <p className="Narratives__step-num">0{i + 1}</p>
+            <p className="Narratives__step-title">{step.title}</p>
+            <p className="Narratives__step-desc">{step.desc}</p>
           </div>
         ))}
       </div>

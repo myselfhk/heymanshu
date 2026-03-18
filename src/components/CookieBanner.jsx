@@ -14,7 +14,7 @@ export default function CookieBanner() {
         left: '50%',
         transform: 'translateX(-50%)',
         background: '#ffffff',
-        color: '#161616',
+        color: '#1B1B1F',
         borderRadius: 60,
         padding: '10px 24px 10px 28px',
         zIndex: 500,
@@ -35,18 +35,18 @@ export default function CookieBanner() {
         onClick={() => setVisible(false)}
         style={{
           background: 'transparent',
-          border: '1px solid #161616',
+          border: '1px solid #1B1B1F',
           borderRadius: 82,
           padding: '5px 14px 4px',
           fontSize: 15,
           cursor: 'pointer',
-          color: '#161616',
+          color: '#1B1B1F',
           fontFamily: 'inherit',
           flexShrink: 0,
           transition: 'background 0.2s, color 0.2s',
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = '#161616'; e.currentTarget.style.color = '#fff' }}
-        onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#161616' }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = '#1B1B1F'; e.currentTarget.style.color = '#fff' }}
+        onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#1B1B1F' }}
       >
         Okay
       </button>

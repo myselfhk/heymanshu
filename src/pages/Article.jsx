@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
-import { ARTICLES } from '../data/articles'
+import { useAllArticles } from '../hooks/useAllArticles'
 import InnerHeader from '../components/InnerHeader'
 import AsidePanel from '../components/AsidePanel'
 import Footer from '../components/Footer'
@@ -19,12 +19,12 @@ export default function Article() {
   const lenisRef = useRef(null)
   const pageRef = useRef(null)
 
-  const article = ARTICLES.find(a => a.slug === slug)
-  const articleIndex = ARTICLES.findIndex(a => a.slug === slug)
-  const otherArticles = ARTICLES.filter(a => a.slug !== slug).slice(0, 2)
+  const { data: allArticles, loading } = useAllArticles()
+  const article = allArticles?.find(a => a.slug === slug) ?? null
+  const otherArticles = allArticles?.filter(a => a.slug !== slug).slice(0, 2) ?? []
 
   useEffect(() => {
-    if (!article) { navigate('/writing'); return }
+    if (!loading && !article) { navigate('/writing'); return }
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
     lenisRef.current = lenis
     lenis.on('scroll', ScrollTrigger.update)
@@ -56,10 +56,11 @@ export default function Article() {
     else lenisRef.current?.start()
   }, [panelOpen])
 
+  if (loading) return null
   if (!article) return null
 
   return (
-    <div ref={pageRef} style={{ background:'#F7F4EF', minHeight:'100vh', color:'#0E0E0E', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
+    <div ref={pageRef} style={{ background:'#EDE8E3', minHeight:'100vh', color:'#1B1B1F', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
       <InnerHeader onNotifyClick={() => setPanelOpen(true)} />
       <AsidePanel open={panelOpen} onClose={() => setPanelOpen(false)} />
 
@@ -68,12 +69,12 @@ export default function Article() {
         data-nav-theme="dark"
         style={{
         padding:'160px 80px 80px', position:'relative', overflow:'hidden',
-        background:'#F7F4EF', borderBottom:'1px solid rgba(0,0,0,0.07)',
+        background:'#EDE8E3', borderBottom:'1px solid rgba(0,0,0,0.07)',
       }}>
         <div style={{position:'absolute',inset:0,opacity:0.03,backgroundImage:NOISE_SVG,backgroundSize:180,mixBlendMode:'multiply',pointerEvents:'none'}} />
 
         <div className="article__hero-meta" style={{opacity:0,display:'flex',gap:24,alignItems:'center',marginBottom:40,position:'relative',zIndex:1}}>
-          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C'}}>{article.tag}</span>
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'#C2A661'}}>{article.tag}</span>
           <span style={{width:4,height:4,borderRadius:'50%',background:'rgba(0,0,0,0.15)'}} />
           <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(0,0,0,0.4)'}}>{article.date}</span>
           <span style={{width:4,height:4,borderRadius:'50%',background:'rgba(0,0,0,0.15)'}} />
@@ -124,8 +125,8 @@ export default function Article() {
               }}
             >
               <div>
-                <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C',display:'block',marginBottom:8}}>{a.tag}</span>
-                <h4 style={{fontFamily:"var(--font-base)",fontSize:22,fontWeight:300,color:'#0E0E0E',lineHeight:1.2,letterSpacing:'-0.01em'}}>{a.title}</h4>
+                <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#C2A661',display:'block',marginBottom:8}}>{a.tag}</span>
+                <h4 style={{fontFamily:"var(--font-base)",fontSize:22,fontWeight:300,color:'#1B1B1F',lineHeight:1.2,letterSpacing:'-0.01em'}}>{a.title}</h4>
               </div>
               <span style={{color:'rgba(0,0,0,0.25)',fontSize:18,flexShrink:0}}>→</span>
             </div>

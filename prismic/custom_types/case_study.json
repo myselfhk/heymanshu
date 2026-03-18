@@ -1,0 +1,132 @@
+{
+  "id": "case_study",
+  "label": "Case Study",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": { "label": "URL Slug", "placeholder": "e.g. paytm" }
+      },
+      "company": {
+        "type": "Text",
+        "config": { "label": "Company Name", "placeholder": "e.g. Paytm" }
+      },
+      "year": {
+        "type": "Text",
+        "config": { "label": "Year", "placeholder": "e.g. 2021–22" }
+      },
+      "discipline": {
+        "type": "Text",
+        "config": { "label": "Discipline", "placeholder": "e.g. Design Systems" }
+      },
+      "hero_gradient": {
+        "type": "Text",
+        "config": { "label": "Hero Gradient (CSS)", "placeholder": "linear-gradient(160deg, #0D1B2A 0%, #0A2A3A 50%, #0A1F2E 100%)" }
+      },
+      "headline_lines": {
+        "type": "Group",
+        "config": {
+          "label": "Headline Lines",
+          "fields": {
+            "line": { "type": "Text", "config": { "label": "Line of headline" } }
+          }
+        }
+      },
+      "headline_italic_word": {
+        "type": "Text",
+        "config": { "label": "Italic Word (last word of headline)", "placeholder": "e.g. considered." }
+      },
+      "stats": {
+        "type": "Group",
+        "config": {
+          "label": "Hero Stats (3 items)",
+          "fields": {
+            "stat_label": { "type": "Text", "config": { "label": "Label (e.g. Scope)" } },
+            "stat_value": { "type": "Text", "config": { "label": "Value (e.g. Design System)" } }
+          }
+        }
+      }
+    },
+    "Chapters": {
+      "chapters": {
+        "type": "Group",
+        "config": {
+          "label": "Chapters",
+          "fields": {
+            "chapter_number": { "type": "Text", "config": { "label": "Number", "placeholder": "1" } },
+            "chapter_label": { "type": "Text", "config": { "label": "Label (uppercase)", "placeholder": "THE PROBLEM" } },
+            "heading": { "type": "Text", "config": { "label": "Chapter Heading" } },
+            "paragraphs": {
+              "type": "StructuredText",
+              "config": { "label": "Paragraphs", "multi": "paragraph,hyperlink,strong,em" }
+            },
+            "pull_quote": { "type": "Text", "config": { "label": "Pull Quote (optional)" } },
+            "visual_panel": { "type": "Text", "config": { "label": "Visual Panel ID (optional)", "placeholder": "paytm-a" } }
+          }
+        }
+      }
+    },
+    "Results": {
+      "metrics": {
+        "type": "Group",
+        "config": {
+          "label": "Metrics (3 items)",
+          "fields": {
+            "display": { "type": "Text", "config": { "label": "Display Value", "placeholder": "34→1" } },
+            "metric_label": { "type": "Text", "config": { "label": "Metric Label", "placeholder": "Button variants collapsed" } }
+          }
+        }
+      },
+      "learned": {
+        "type": "Text",
+        "config": { "label": "What I Learned (single sentence)" }
+      },
+      "impact": {
+        "type": "Group",
+        "config": {
+          "label": "Impact Items",
+          "fields": {
+            "item": { "type": "Text", "config": { "label": "Impact bullet" } }
+          }
+        }
+      },
+      "next_project_uid": {
+        "type": "Text",
+        "config": { "label": "Next Project Slug", "placeholder": "honda" }
+      }
+    },
+    "Manifesto Card": {
+      "manifesto_order": {
+        "type": "Text",
+        "config": { "label": "Manifesto Order Number", "placeholder": "01" }
+      },
+      "manifesto_title": {
+        "type": "Text",
+        "config": { "label": "Card Title", "placeholder": "Paytm. Design System" }
+      },
+      "manifesto_tagline": {
+        "type": "Text",
+        "config": { "label": "Card Tagline (short description)" }
+      },
+      "manifesto_tags": {
+        "type": "Group",
+        "config": {
+          "label": "Card Tags",
+          "fields": {
+            "tag": { "type": "Text", "config": { "label": "Tag" } }
+          }
+        }
+      },
+      "manifesto_color": {
+        "type": "Text",
+        "config": { "label": "Card Color (hex)", "placeholder": "#5A3F72" }
+      },
+      "manifesto_has_link": {
+        "type": "Boolean",
+        "config": { "label": "Has case study link?", "default_value": true, "placeholder_true": "Yes", "placeholder_false": "No (placeholder project)" }
+      }
+    }
+  }
+}

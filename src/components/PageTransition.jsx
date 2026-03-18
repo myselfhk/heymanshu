@@ -34,7 +34,7 @@ export default function PageTransition() {
       style={{
         position: 'fixed',
         inset: 0,
-        background: '#0E0E0E',
+        background: '#1B1B1F',
         transformOrigin: 'top',
         scaleY: 0,
         zIndex: 9999,

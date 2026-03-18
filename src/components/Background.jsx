@@ -5,11 +5,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 // Each layer slides up on scroll to reveal a new background color
 const layers = [
   { color: '#034C53', trigger: null },            // 0: teal  - hero (always visible, base)
-  { color: '#161616', trigger: '#manifesto' },    // 1: dark  - work section
-  { color: '#0A1F1F', trigger: '#philosophy' },   // 2: dark teal - philosophy quote
-  { color: '#F7F4EF', trigger: '#shelf' },        // 3: off-white - the shelf
-  { color: '#0E0E0E', trigger: '#narratives' },   // 4: dark  - narratives pitch deck
-  { color: '#161616', trigger: '#news' },         // 5: dark  - news/writing
+  { color: '#1B1B1F', trigger: '#manifesto' },    // 1: dark  - work section
+  { color: '#0C1E20', trigger: '#philosophy' },   // 2: dark teal - philosophy quote
+  { color: '#EDE8E3', trigger: '#shelf' },        // 3: off-white - Shop
+  { color: '#1B1B1F', trigger: '#Narratives' },   // 4: dark  - Narratives pitch deck
+  { color: '#1B1B1F', trigger: '#news' },         // 5: dark  - news/writing
 ]
 
 export default function Background() {

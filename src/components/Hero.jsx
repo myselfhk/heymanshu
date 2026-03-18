@@ -1,25 +1,18 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import SplitText from './SplitText'
+import { useSettings } from '../hooks/useSettings'
 
-/* ─────────────────────────────────────────────────────────────────
-   GALLERY ITEMS  — 8 cards, 4:5 portrait ratio
-   ┌ Images folder: /public/images/
-   │ File names   : gallery-1.jpg, gallery-2.jpg, gallery-3.jpg,
-   │                gallery-4.jpg, gallery-5.jpg
-   └ Recommended  : portrait images, at least 800 × 1000 px
-─────────────────────────────────────────────────────────────────── */
-const GALLERY_ITEMS = [
+const DEFAULT_GALLERY_ITEMS = [
   { src: '/images/gallery-1.jpg', bg: '#1E2A3D' },
   { src: '/images/gallery-2.jpg', bg: '#2E1E3D' },
   { src: '/images/gallery-3.jpg', bg: '#1E3D2C' },
   { src: '/images/gallery-4.jpg', bg: '#3D2A1E' },
   { src: '/images/gallery-5.jpg', bg: '#3D3A1E' },
-  { src: '/images/gallery-6.jpg', bg: '#3D3A1E' },   // terracotta
-  { src: '/images/gallery-7.jpg', bg: '#3D3A1E' },   // deep blue
-  { src: '/images/gallery-8.jpg', bg: '#3D3A1E' },   // gold
+  { src: '/images/gallery-6.jpg', bg: '#3D3A1E' },
+  { src: '/images/gallery-7.jpg', bg: '#3D3A1E' },
+  { src: '/images/gallery-8.jpg', bg: '#3D3A1E' },
 ]
-const N = GALLERY_ITEMS.length
 
 /* Gallery auto-advance speed: cards per second */
 const SPEED_CPS = 1 / 3.5
@@ -85,6 +78,12 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
   const modalRef        = useRef(null)
   const modalContentRef = useRef(null)
 
+  const { data: settings } = useSettings()
+  const galleryItems = settings?.galleryItems?.length ? settings.galleryItems : DEFAULT_GALLERY_ITEMS
+  const galleryItemsRef = useRef(galleryItems)
+  // Keep ref in sync so animation ticker always has fresh items without re-creating the ticker
+  useEffect(() => { galleryItemsRef.current = galleryItems }, [galleryItems])
+
   /* ── Gallery animation refs ──────────────────────────────────── */
   const progressRef   = useRef(0)
   const cardDomRefs   = useRef([])
@@ -94,14 +93,15 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
 
   /* ── applyProgress — direct DOM updates, no React re-renders ─── */
   const applyProgress = useCallback((p) => {
-    const norm      = ((p % N) + N) % N
-    const activeDot = Math.round(norm) % N
+    const n        = galleryItemsRef.current.length || 1
+    const norm     = ((p % n) + n) % n
+    const activeDot = Math.round(norm) % n
 
     cardDomRefs.current.forEach((el, i) => {
       if (!el) return
       let off = i - norm
-      if (off >  N / 2) off -= N
-      if (off < -N / 2) off += N
+      if (off >  n / 2) off -= n
+      if (off < -n / 2) off += n
 
       const { x, ry, z, sc, op, zi } = coverflowStyle(off)
       el.style.transform = `translateX(${x}vw) rotateY(${ry}deg) translateZ(${z}px) scale(${sc})`
@@ -245,14 +245,14 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
           className="hero-title"
           style={{
             fontSize: 58, fontWeight: 500, lineHeight: '62px',
-            color: '#fff', letterSpacing: '-1.5px',
+            color: '#fff', letterSpacing: '-0.5px',
             textAlign: 'center',
           }}
         >
           <SplitText text="Designer. Thinker." />
           <br />
           <SplitText text="Builder. " />
-          <span style={{  }}><SplitText text="Human." /></span>
+          <span style={{  }}><em><SplitText text="Human." /></em></span>
         </h1>
 
         {/* Tagline + CTA — animate together */}
@@ -260,11 +260,11 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
           ref={subtitleRef}
           style={{
             display: 'flex', flexDirection: 'column',
-            alignItems: 'center', gap: 24, opacity: 0,
+            alignItems: 'center', gap: 20, opacity: 0,
           }}
         >
           <p className="hero-tagline">
-            Turning complex flows into seamless product experiences.
+            I'm Himanshu, a designer who helps founders craft beautiful things. 
           </p>
           <a
             href="#manifesto"
@@ -274,13 +274,7 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
             <span className="btn__text">See Work</span>
             <span className="btn__arrow">→</span>
           </a>
-          <button
-            className="btn btn--ghost btn--ghost-dark"
-            onClick={onNotifyClick}
-          >
-            <span className="btn__text">or Let's Talk</span>
-            <span className="btn__arrow">↗</span>
-          </button>
+         
         </div>
       </div>
 
@@ -292,7 +286,7 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
       >
-        {GALLERY_ITEMS.map((item, i) => (
+        {galleryItems.map((item, i) => (
           <div
             key={i}
             ref={el => { cardDomRefs.current[i] = el }}
@@ -307,7 +301,7 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
 
       {/* ── Dot pagination ────────────────────────────────────── */}
       <div className="gallery-dots">
-        {GALLERY_ITEMS.map((_, i) => (
+        {galleryItems.map((_, i) => (
           <div
             key={i}
             ref={el => { dotRefs.current[i] = el }}

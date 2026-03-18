@@ -41,8 +41,8 @@ export default function InnerHeader({ onNotifyClick }) {
 
   const navLinks = [
     { label: 'Work',       href: '/#manifesto' },
-    { label: 'The Shelf',  href: '/#shelf' },
-    { label: 'Narratives', href: '/#narratives' },
+    { label: 'Shop',  href: '/#shelf' },
+    { label: 'Narratives', href: '/#Narratives' },
     { label: 'Writing',    href: '/writing' },
     { label: 'About',      href: '/about' },
   ]

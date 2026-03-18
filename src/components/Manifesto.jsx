@@ -2,49 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-const caseStudies = [
-  {
-    id: '01',
-    title: 'Woo. Nigerian Payments Platform',
-    company: 'Woo',
-    year: "'22",
-    tagline: 'Built the UI layer for a payments platform operating in a market where users had real reasons not to trust digital money.',
-    tags: ['Fintech', 'UX Design', 'Trust Systems'],
-    color: '#3D5A80',
-    href: '/work/woo',
-  },
-  {
-    id: '02',
-    title: 'Honda. Customer Portal',
-    company: 'Honda',
-    year: "'23",
-    tagline: 'Redesigned the post-purchase relationship between Honda owners and their cars across a complex multi-screen portal.',
-    tags: ['Automotive', 'Interaction Design', 'Portal'],
-    color: '#2E6B5E',
-    href: '/work/honda',
-  },
-  {
-    id: '03',
-    title: 'Paytm. Design System',
-    company: 'Paytm',
-    year: "'23",
-    tagline: 'One button existed in 34 variations across the app. Built the shared language that stopped that from happening again.',
-    tags: ['Fintech', 'Design Systems', 'Scale'],
-    color: '#5A3F72',
-    href: '/work/paytm',
-  },
-  {
-    id: '04',
-    title: 'Focus Flow. Deep Work Tool',
-    company: 'Self-initiated',
-    year: "'24",
-    tagline: 'A deep-focus tool that adapts to individual work rhythms without interrupting the tools teams already live inside.',
-    tags: ['SaaS', 'UX Research', 'Mobile'],
-    color: '#7C5E32',
-    href: null,
-  },
-]
+import { useAllCaseStudies } from '../hooks/useAllCaseStudies'
 
 export default function Manifesto() {
   const sectionRef    = useRef(null)
@@ -53,6 +11,19 @@ export default function Manifesto() {
   const studyInfoRef  = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const navigate = useNavigate()
+
+  const { data: allStudies } = useAllCaseStudies()
+  // Map Prismic data to the shape this component needs
+  const caseStudies = (allStudies ?? []).map(s => ({
+    id: s.manifestoId,
+    title: s.manifestoTitle,
+    company: s.company,
+    year: `'${s.year?.slice(-2)}`,
+    tagline: s.manifestoTagline,
+    tags: s.manifestoTags,
+    color: s.manifestoColor,
+    href: s.manifestoHasLink ? s.href : null,
+  }))
 
   /* Animate left-column swap whenever active study changes */
   const activatePanel = useCallback((i) => {

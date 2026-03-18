@@ -1,0 +1,67 @@
+{
+  "id": "settings",
+  "label": "Settings",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Hero Gallery": {
+      "gallery_items": {
+        "type": "Group",
+        "config": {
+          "label": "Hero Gallery Images",
+          "fields": {
+            "image": {
+              "type": "Image",
+              "config": { "label": "Gallery Image", "constraint": { "width": 800, "height": 1000 } }
+            },
+            "bg_color": {
+              "type": "Text",
+              "config": { "label": "Background Color (hex, shown while loading)", "placeholder": "#1E2A3D" }
+            }
+          }
+        }
+      }
+    },
+    "Philosophy": {
+      "philosophy_quote": {
+        "type": "Text",
+        "config": { "label": "Philosophy Quote (single sentence, word-by-word animation)" }
+      }
+    },
+    "About Page": {
+      "about_headline": {
+        "type": "Text",
+        "config": { "label": "About Headline", "placeholder": "From Jaipur, with a sketchbook." }
+      },
+      "about_subtitle": {
+        "type": "Text",
+        "config": { "label": "About Subtitle (hero sub-text)" }
+      },
+      "about_origin_quote": {
+        "type": "Text",
+        "config": { "label": "Origin Pull Quote" }
+      },
+      "about_origin_paragraphs": {
+        "type": "StructuredText",
+        "config": { "label": "Origin Story Paragraphs", "multi": "paragraph,strong,em" }
+      },
+      "about_what_i_do": {
+        "type": "Group",
+        "config": {
+          "label": "What I Do (bullet list)",
+          "fields": {
+            "item": { "type": "Text", "config": { "label": "Item" } }
+          }
+        }
+      },
+      "about_miniature_text": {
+        "type": "Text",
+        "config": { "label": "Miniature Studio Description" }
+      },
+      "about_miniature_url": {
+        "type": "Text",
+        "config": { "label": "Miniature Studio URL", "placeholder": "https://theminiature.co" }
+      }
+    }
+  }
+}

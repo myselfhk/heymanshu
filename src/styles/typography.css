@@ -169,7 +169,7 @@
   font-size: var(--text-2xs);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: #B8973C;
+  color: #C2A661;
 }
 
 /* Philosophy quote */
@@ -193,7 +193,7 @@
   font-size: var(--text-2xs);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: #B8973C;
+  color: #C2A661;
   writing-mode: vertical-rl;
 }
 

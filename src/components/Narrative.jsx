@@ -96,7 +96,7 @@ export default function Narrative() {
             {/* Visual band */}
             <span
               className="phrase-card__visual"
-              style={{ background: 'linear-gradient(135deg, rgba(10,107,107,0.9), rgba(10,107,107,0.4))' }}
+              style={{ background: 'linear-gradient(135deg, rgba(5,107,115,0.9), rgba(5,107,115,0.4))' }}
             >
               <span className="phrase-card__ghost" style={{ fontSize: '120px' }}>34</span>
               <span className="phrase-card__stat">
@@ -126,7 +126,7 @@ export default function Narrative() {
           <span className="phrase-card">
             <span
               className="phrase-card__visual"
-              style={{ background: 'linear-gradient(135deg, rgba(184,151,60,0.85), rgba(184,151,60,0.35))' }}
+              style={{ background: 'linear-gradient(135deg, rgba(194,166,97,0.85), rgba(194,166,97,0.35))' }}
             >
               <span className="phrase-card__ghost" style={{ fontSize: '100px' }}>4mo</span>
               <span className="phrase-card__stat">
@@ -155,7 +155,7 @@ export default function Narrative() {
           <span className="phrase-card">
             <span
               className="phrase-card__visual"
-              style={{ background: 'linear-gradient(135deg, #0A6B6B, #0D4040)' }}
+              style={{ background: 'linear-gradient(135deg, #056B73, #0D4040)' }}
             >
               <span className="phrase-card__ghost" style={{ fontSize: '100px' }}>₦</span>
               <span className="phrase-card__stat">

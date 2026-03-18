@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
-import { ARTICLES } from '../data/articles'
+import { useAllArticles } from '../hooks/useAllArticles'
 import InnerHeader from '../components/InnerHeader'
 import AsidePanel from '../components/AsidePanel'
 import Footer from '../components/Footer'
@@ -15,6 +15,7 @@ export default function Writing() {
   const lenisRef = useRef(null)
   const pageRef = useRef(null)
   const navigate = useNavigate()
+  const { data: articles } = useAllArticles()
 
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
@@ -53,7 +54,7 @@ export default function Writing() {
   }, [panelOpen])
 
   return (
-    <div ref={pageRef} style={{ background:'#F7F4EF', minHeight:'100vh', color:'#0E0E0E', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
+    <div ref={pageRef} style={{ background:'#EDE8E3', minHeight:'100vh', color:'#1B1B1F', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
       <InnerHeader onNotifyClick={() => setPanelOpen(true)} />
       <AsidePanel open={panelOpen} onClose={() => setPanelOpen(false)} />
 
@@ -65,14 +66,14 @@ export default function Writing() {
             All essays.
           </h1>
           <p style={{fontFamily:"var(--font-base)",fontSize:14,color:'rgba(0,0,0,0.35)'}}>
-            {ARTICLES.length} essays
+            {articles?.length ?? 0} essays
           </p>
         </div>
       </div>
 
       {/* ── ARTICLE LIST ── */}
       <div style={{padding:'0 80px'}}>
-        {ARTICLES.map((article, i) => (
+        {(articles ?? []).map((article) => (
           <ArticleRow key={article.slug} article={article} navigate={navigate} />
         ))}
 
@@ -122,13 +123,13 @@ function ArticleRow({ article, navigate }) {
       {/* Content */}
       <div>
         <div style={{marginBottom:8,display:'flex',gap:16,alignItems:'center'}}>
-          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C'}}>{article.tag}</span>
+          <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#C2A661'}}>{article.tag}</span>
           <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.12em',textTransform:'uppercase',color:'rgba(0,0,0,0.25)'}}>{article.readTime} read</span>
         </div>
         <h3 style={{
           fontFamily:"var(--font-base)",
           fontSize:'clamp(20px,2.2vw,30px)',fontWeight:300,lineHeight:1.15,
-          color: hover ? 'rgba(0,0,0,0.6)' : '#0E0E0E',
+          color: hover ? 'rgba(0,0,0,0.6)' : '#1B1B1F',
           letterSpacing:'-0.01em', marginBottom:12,
           transition:'color 0.3s',
         }}>{article.title}</h3>
@@ -140,7 +141,7 @@ function ArticleRow({ article, navigate }) {
         display:'flex', alignItems:'center', gap:8,
         fontFamily:"var(--font-base)", fontSize:11,
         letterSpacing:'0.14em', textTransform:'uppercase',
-        color: hover ? '#0E0E0E' : 'rgba(0,0,0,0.3)',
+        color: hover ? '#1B1B1F' : 'rgba(0,0,0,0.3)',
         transition:'color 0.3s', whiteSpace:'nowrap', alignSelf:'center',
       }}>
         <span>{article.date}</span>

@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
-import { CASE_STUDIES, PROJECT_ORDER } from '../data/caseStudies'
+import { useAllCaseStudies } from '../hooks/useAllCaseStudies'
 import InnerHeader from '../components/InnerHeader'
 import AsidePanel from '../components/AsidePanel'
 import Footer from '../components/Footer'
@@ -15,7 +15,7 @@ const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='h
 
 /* ─── Visual Panels — CSS-only design compositions ─── */
 function PaytmPanelA() {
-  const colors = ['#0A4444','#0A5555','#0A5F5F','#0A6B6B','#0A4A4A','#0A5858']
+  const colors = ['#0A4444','#0A5555','#0A5F5F','#056B73','#0A4A4A','#0A5858']
   const radii = [2, 4, 6, 8, 12, 16]
   return (
     <div className="cs__visual-panel cs__visual--paytm-a">
@@ -36,7 +36,7 @@ function PaytmPanelB() {
   return (
     <div className="cs__visual-panel cs__visual--paytm-b">
       <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:16}}>
-        <div style={{border:'1px solid #0A6B6B',borderRadius:40,padding:'14px 48px',fontFamily:"var(--font-base)",fontSize:12,letterSpacing:'0.16em',textTransform:'uppercase',color:'#0A6B6B'}}>PAY NOW</div>
+        <div style={{border:'1px solid #056B73',borderRadius:40,padding:'14px 48px',fontFamily:"var(--font-base)",fontSize:12,letterSpacing:'0.16em',textTransform:'uppercase',color:'#056B73'}}>PAY NOW</div>
         <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',color:'rgba(255,255,255,0.2)',textTransform:'uppercase'}}>1 button variant</span>
       </div>
     </div>
@@ -55,11 +55,11 @@ function HondaPanelA() {
             <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8,position:'relative'}}>
               <div style={{
                 width:12,height:12,borderRadius:'50%',
-                background: node.active ? '#0A6B6B' : node.done ? 'rgba(255,255,255,0.35)' : 'transparent',
-                border: node.active ? '2px solid #0A6B6B' : node.done ? '2px solid rgba(255,255,255,0.35)' : '2px solid rgba(255,255,255,0.15)',
+                background: node.active ? '#056B73' : node.done ? 'rgba(255,255,255,0.35)' : 'transparent',
+                border: node.active ? '2px solid #056B73' : node.done ? '2px solid rgba(255,255,255,0.35)' : '2px solid rgba(255,255,255,0.15)',
                 flexShrink:0,
               }} />
-              <span style={{fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.1em',textTransform:'uppercase',color: node.active ? '#B8973C' : 'rgba(255,255,255,0.3)',whiteSpace:'nowrap',textAlign:'center'}}>{node.label}</span>
+              <span style={{fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.1em',textTransform:'uppercase',color: node.active ? '#C2A661' : 'rgba(255,255,255,0.3)',whiteSpace:'nowrap',textAlign:'center'}}>{node.label}</span>
             </div>
             {i < nodes.length - 1 && <div style={{flex:1,height:1,background:'rgba(255,255,255,0.1)',margin:'0 4px',marginBottom:20}} />}
           </div>
@@ -72,7 +72,7 @@ function HondaPanelB() {
   return (
     <div className="cs__visual-panel cs__visual--honda-b">
       <div style={{background:'#0A2020',border:'1px solid rgba(255,255,255,0.08)',borderRadius:12,padding:'28px 32px',minWidth:260}}>
-        <div style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:16}}>Service Complete</div>
+        <div style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.18em',textTransform:'uppercase',color:'#C2A661',marginBottom:16}}>Service Complete</div>
         {[['Oil Change','Rs. 800'],['Air Filter','Rs. 450'],['Labour','Rs. 600']].map(([item,price],i) => (
           <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:'1px solid rgba(255,255,255,0.05)',fontFamily:"var(--font-base)",fontSize:13,color:'rgba(255,255,255,0.55)'}}>
             <span>{item}</span><span>{price}</span>
@@ -82,7 +82,7 @@ function HondaPanelB() {
           <span style={{fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(255,255,255,0.3)'}}>Total</span>
           <span style={{fontFamily:"var(--font-base)",fontSize:28,fontWeight:300,color:'white'}}>Rs. 1,850</span>
         </div>
-        <div style={{marginTop:20,border:'1px solid #0A6B6B',borderRadius:40,padding:'10px 24px',display:'flex',justifyContent:'center',fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#0A6B6B',cursor:'pointer'}}>Share on WhatsApp</div>
+        <div style={{marginTop:20,border:'1px solid #056B73',borderRadius:40,padding:'10px 24px',display:'flex',justifyContent:'center',fontFamily:"var(--font-base)",fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'#056B73',cursor:'pointer'}}>Share on WhatsApp</div>
       </div>
     </div>
   )
@@ -91,19 +91,19 @@ function WooPanelA() {
   return (
     <div className="cs__visual-panel cs__visual--woo-a">
       <div style={{border:'2px solid rgba(255,255,255,0.12)',borderRadius:24,padding:'28px 24px',width:220,background:'rgba(0,0,0,0.3)'}}>
-        <div style={{fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:16,textAlign:'center'}}>Transaction Confirmed</div>
+        <div style={{fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.18em',textTransform:'uppercase',color:'#C2A661',marginBottom:16,textAlign:'center'}}>Transaction Confirmed</div>
         <div style={{fontFamily:"var(--font-base)",fontSize:36,fontWeight:300,color:'white',textAlign:'center',marginBottom:8}}>₦ 12,500</div>
         <div style={{fontFamily:"var(--font-base)",fontSize:12,color:'rgba(255,255,255,0.4)',textAlign:'center',marginBottom:4}}>To: Amaka Okonkwo</div>
         <div style={{fontFamily:"var(--font-base)",fontSize:11,color:'rgba(255,255,255,0.25)',textAlign:'center',marginBottom:20}}>REF: WOO-2311-4892</div>
-        <div style={{border:'1px solid #B8973C',borderRadius:40,padding:'10px 20px',fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.14em',textTransform:'uppercase',color:'#B8973C',textAlign:'center'}}>Share Receipt</div>
+        <div style={{border:'1px solid #C2A661',borderRadius:40,padding:'10px 20px',fontFamily:"var(--font-base)",fontSize:9,letterSpacing:'0.14em',textTransform:'uppercase',color:'#C2A661',textAlign:'center'}}>Share Receipt</div>
       </div>
     </div>
   )
 }
 function WooPanelB() {
   const txns = [
-    {init:'AO',name:'Amaka Okonkwo',amount:'₦12,500',time:'Yesterday, 2:14 PM',color:'#0A6B6B'},
-    {init:'JT',name:'James Taiwo',amount:'₦5,000',time:'Mon, 11:30 AM',color:'#B8973C'},
+    {init:'AO',name:'Amaka Okonkwo',amount:'₦12,500',time:'Yesterday, 2:14 PM',color:'#056B73'},
+    {init:'JT',name:'James Taiwo',amount:'₦5,000',time:'Mon, 11:30 AM',color:'#C2A661'},
     {init:'CN',name:'Chidi Nwosu',amount:'₦8,200',time:'Mon, 9:05 AM',color:'#4A6B4A'},
     {init:'FB',name:'Funke Balogun',amount:'₦3,500',time:'Sun, 6:48 PM',color:'#6B4A4A'},
     {init:'OK',name:'Olu Kanyii',amount:'₦15,000',time:'Sat, 3:22 PM',color:'#4A4A6B'},
@@ -162,14 +162,13 @@ function MetricItem({ metric }) {
 }
 
 /* ─── Next project card ─── */
-function NextProjectCard({ slug }) {
-  const project = CASE_STUDIES[slug]
+function NextProjectCard({ project }) {
   const navigate = useNavigate()
   const cardRef = useRef(null)
 
   useEffect(() => {
     const card = cardRef.current
-    if (!card) return
+    if (!card || !project) return
     let tX = 0, tY = 0, cX = 0, cY = 0, rafId
     const onMove = (e) => {
       const r = card.getBoundingClientRect()
@@ -186,7 +185,7 @@ function NextProjectCard({ slug }) {
     card.addEventListener('mousemove', onMove)
     card.addEventListener('mouseleave', onLeave)
     return () => { card.removeEventListener('mousemove',onMove); card.removeEventListener('mouseleave',onLeave); cancelAnimationFrame(rafId) }
-  }, [slug])
+  }, [project])
 
   if (!project) return null
 
@@ -242,10 +241,13 @@ export default function CaseStudy() {
   const lenisRef = useRef(null)
   const pageRef = useRef(null)
 
-  const project = CASE_STUDIES[slug]
+  const { data: allStudies, loading } = useAllCaseStudies()
+  const studyMap = allStudies ? Object.fromEntries(allStudies.map(s => [s.slug, s])) : {}
+  const project = studyMap[slug]
+  const nextProject = project?.nextProject ? studyMap[project.nextProject] : null
 
   useEffect(() => {
-    if (!project) { navigate('/'); return }
+    if (!loading && !project) { navigate('/'); return }
 
     // Init Lenis smooth scroll
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
@@ -343,12 +345,11 @@ export default function CaseStudy() {
     else lenisRef.current?.start()
   }, [panelOpen])
 
+  if (loading) return null
   if (!project) return null
 
-  const nextProject = CASE_STUDIES[project.nextProject]
-
   return (
-    <div ref={pageRef} className="is-case-study" style={{ background:'#F7F4EF', minHeight:'100vh', color:'#0E0E0E', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
+    <div ref={pageRef} className="is-case-study" style={{ background:'#EDE8E3', minHeight:'100vh', color:'#1B1B1F', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
       <InnerHeader onNotifyClick={() => setPanelOpen(true)} />
       <AsidePanel open={panelOpen} onClose={() => setPanelOpen(false)} />
 
@@ -452,7 +453,7 @@ export default function CaseStudy() {
           <ul style={{listStyle:'none',padding:0}}>
             {project.impact.map((item, i) => (
               <li key={i} style={{fontFamily:"var(--font-base)",fontSize:17,fontWeight:300,color:'rgba(0,0,0,0.6)',padding:'12px 0',borderBottom:'1px solid rgba(0,0,0,0.07)',display:'flex',alignItems:'center',gap:16}}>
-                <span style={{color:'#B8973C',fontSize:12}}>◆</span>
+                <span style={{color:'#C2A661',fontSize:12}}>◆</span>
                 {item}
               </li>
             ))}
@@ -466,9 +467,9 @@ export default function CaseStudy() {
           <div>
             <div className="cs__next-label">Next Project →</div>
             <a
-              href={`/work/${project.nextProject}`}
+              href={`/work/${nextProject.slug}`}
               className="cs__next-title"
-              onClick={(e) => { e.preventDefault(); navigate(`/work/${project.nextProject}`) }}
+              onClick={(e) => { e.preventDefault(); navigate(`/work/${nextProject.slug}`) }}
             >
               {nextProject.headline.map((line, i) => (
                 <span key={i} style={{display:'block'}}>
@@ -483,8 +484,8 @@ export default function CaseStudy() {
               {nextProject.company} · {nextProject.discipline}
             </div>
           </div>
-          <div style={{cursor:'pointer'}} onClick={() => navigate(`/work/${project.nextProject}`)}>
-            <NextProjectCard slug={project.nextProject} />
+          <div style={{cursor:'pointer'}} onClick={() => navigate(`/work/${nextProject.slug}`)}>
+            <NextProjectCard project={nextProject} />
           </div>
         </div>
       )}

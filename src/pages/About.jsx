@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
+import { useSettings } from '../hooks/useSettings'
 import InnerHeader from '../components/InnerHeader'
 import AsidePanel from '../components/AsidePanel'
 import Footer from '../components/Footer'
@@ -16,6 +17,8 @@ export default function About() {
   const lenisRef = useRef(null)
   const pageRef = useRef(null)
   const navigate = useNavigate()
+  const { data: settings } = useSettings()
+  const about = settings?.about
 
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
@@ -63,7 +66,7 @@ export default function About() {
   }, [panelOpen])
 
   return (
-    <div ref={pageRef} style={{ background:'#F7F4EF', minHeight:'100vh', color:'#0E0E0E', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
+    <div ref={pageRef} style={{ background:'#EDE8E3', minHeight:'100vh', color:'#1B1B1F', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
       <InnerHeader onNotifyClick={() => setPanelOpen(true)} />
       <AsidePanel open={panelOpen} onClose={() => setPanelOpen(false)} />
 
@@ -73,7 +76,7 @@ export default function About() {
         style={{
         minHeight:'100vh', display:'grid', gridTemplateColumns:'1fr auto',
         alignItems:'end', padding:'160px 80px 80px', position:'relative', overflow:'hidden',
-        background:'#F7F4EF',
+        background:'#EDE8E3',
       }}>
         {/* Noise */}
         <div style={{position:'absolute',inset:0,opacity:0.03,backgroundImage:NOISE_SVG,backgroundSize:180,mixBlendMode:'multiply',pointerEvents:'none'}} />
@@ -81,17 +84,21 @@ export default function About() {
         <div style={{position:'relative',zIndex:1}}>
           <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(0,0,0,0.3)',marginBottom:32}}>About</div>
           <h1 className="about__hero-headline" style={{opacity:0}}>
-            From Jaipur,<br />
-            <em style={{fontFamily:"var(--font-base)",}}>with a sketchbook.</em>
+            {about?.headline
+              ? about.headline.split(', ').map((part, i, arr) => i < arr.length - 1
+                  ? <span key={i}>{part},<br /></span>
+                  : <em key={i} style={{fontFamily:"var(--font-base)"}}>{part}</em>
+                )
+              : <><span>From Jaipur,<br /></span><em style={{fontFamily:"var(--font-base)"}}>with a sketchbook.</em></>
+            }
           </h1>
           <p className="about__hero-sub" style={{
             opacity:0, marginTop:32,
             fontFamily:"var(--font-base)", fontSize:'clamp(15px,1.4vw,18px)',
             fontWeight:300, color:'rgba(0,0,0,0.5)', lineHeight:1.7,
-            maxWidth:'48ch',
+            maxWidth:'48ch', whiteSpace:'pre-line',
           }}>
-            5+ years. 3 countries. 100M+ users.<br />
-            One consistent habit: noticing when things feel off.
+            {about?.subtitle ?? '5+ years. 3 countries. 100M+ users.\nOne consistent habit: noticing when things feel off.'}
           </p>
         </div>
 
@@ -113,29 +120,33 @@ export default function About() {
 
         {/* Origin story */}
         <div className="about__body-section" style={{padding:'80px 0', borderTop:'1px solid rgba(0,0,0,0.07)'}}>
-          <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:32}}>Origin</div>
-          <div className="cs__pull-quote" style={{marginBottom:40}}>
-            <p className="cs__pull-quote-text">"A confusing payment flow isn't a UX problem. It's someone's salary not arriving on time."</p>
-          </div>
-          <p style={{fontFamily:"var(--font-base)",fontSize:17,fontWeight:300,lineHeight:1.75,color:'rgba(0,0,0,0.6)',marginBottom:24,maxWidth:'62ch'}}>
-            That sentence changed how I work. Once you understand that design decisions have weight — that they land somewhere real — you stop treating them like aesthetic choices.
-          </p>
-          <p style={{fontFamily:"var(--font-base)",fontSize:17,fontWeight:300,lineHeight:1.75,color:'rgba(0,0,0,0.6)',maxWidth:'62ch'}}>
-            I've spent 5 years at companies like Paytm, Honda, Wipro, Creditas, and Woo learning this in practice. Each company different. Same underlying problem: products that worked technically but left people feeling uncertain.
-          </p>
+          <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'#C2A661',marginBottom:32}}>Origin</div>
+          {about?.originQuote && (
+            <div className="cs__pull-quote" style={{marginBottom:40}}>
+              <p className="cs__pull-quote-text">"{about.originQuote}"</p>
+            </div>
+          )}
+          {(about?.originParagraphs ?? [
+            'That sentence changed how I work. Once you understand that design decisions have weight — that they land somewhere real — you stop treating them like aesthetic choices.',
+            "I've spent 5 years at companies like Paytm, Honda, Wipro, Creditas, and Woo learning this in practice. Each company different. Same underlying problem: products that worked technically but left people feeling uncertain.",
+          ]).map((para, i, arr) => (
+            <p key={i} style={{fontFamily:"var(--font-base)",fontSize:17,fontWeight:300,lineHeight:1.75,color:'rgba(0,0,0,0.6)',marginBottom: i < arr.length - 1 ? 24 : 0,maxWidth:'62ch'}}>
+              {para}
+            </p>
+          ))}
         </div>
 
         {/* What I do */}
         <div className="about__body-section" style={{padding:'80px 0', borderTop:'1px solid rgba(0,0,0,0.07)'}}>
-          <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:32}}>What I Do</div>
+          <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'#C2A661',marginBottom:32}}>What I Do</div>
           <ul style={{listStyle:'none',padding:0,display:'flex',flexDirection:'column',gap:0}}>
-            {[
+            {(about?.whatIDo ?? [
               'Solo design partner for product teams',
               'Full process: research → systems → delivery',
               'Available for contract engagements and design partnerships',
-            ].map((item, i) => (
-              <li key={i} style={{fontFamily:"var(--font-base)",fontSize:'clamp(22px,2.5vw,34px)',fontWeight:300,lineHeight:1.3,color:'#0E0E0E',padding:'20px 0',borderBottom:'1px solid rgba(0,0,0,0.07)',display:'flex',alignItems:'center',gap:16}}>
-                <span style={{color:'#B8973C',fontSize:12,fontFamily:"var(--font-base)"}}>◆</span>
+            ]).map((item, i) => (
+              <li key={i} style={{fontFamily:"var(--font-base)",fontSize:'clamp(22px,2.5vw,34px)',fontWeight:300,lineHeight:1.3,color:'#1B1B1F',padding:'20px 0',borderBottom:'1px solid rgba(0,0,0,0.07)',display:'flex',alignItems:'center',gap:16}}>
+                <span style={{color:'#C2A661',fontSize:12,fontFamily:"var(--font-base)"}}>◆</span>
                 {item}
               </li>
             ))}
@@ -144,23 +155,23 @@ export default function About() {
 
         {/* Miniature */}
         <div className="about__body-section" style={{padding:'80px 0', borderTop:'1px solid rgba(0,0,0,0.07)'}}>
-          <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'#B8973C',marginBottom:32}}>Miniature</div>
+          <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'#C2A661',marginBottom:32}}>Miniature</div>
           <p style={{fontFamily:"var(--font-base)",fontSize:17,fontWeight:300,lineHeight:1.75,color:'rgba(0,0,0,0.6)',marginBottom:24,maxWidth:'62ch'}}>
-            When I'm not doing client work, I run Miniature — a small studio focused on GenAI and Fintech products. It's where I work on things that don't have a brief yet.
+            {about?.miniatureText ?? "When I'm not doing client work, I run Miniature — a small studio focused on GenAI and Fintech products. It's where I work on things that don't have a brief yet."}
           </p>
           <a
-            href="https://theminiature.co"
+            href={about?.miniatureUrl ?? 'https://theminiature.co'}
             target="_blank"
             rel="noopener noreferrer"
-            style={{fontFamily:"var(--font-base)",fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:'#0A6B6B',display:'inline-flex',alignItems:'center',gap:8}}
+            style={{fontFamily:"var(--font-base)",fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:'#056B73',display:'inline-flex',alignItems:'center',gap:8}}
           >
-            theminiature.co ↗
+            {(about?.miniatureUrl ?? 'https://theminiature.co').replace('https://', '')} ↗
           </a>
         </div>
 
         {/* CTA */}
         <div className="about__body-section" style={{padding:'80px 0 120px', borderTop:'1px solid rgba(0,0,0,0.07)'}}>
-          <p style={{fontFamily:"var(--font-base)",fontSize:'clamp(28px,3.5vw,48px)',fontWeight:300,lineHeight:1.15,color:'#0E0E0E',marginBottom:40,maxWidth:'20ch',letterSpacing:'-0.02em'}}>
+          <p style={{fontFamily:"var(--font-base)",fontSize:'clamp(28px,3.5vw,48px)',fontWeight:300,lineHeight:1.15,color:'#1B1B1F',marginBottom:40,maxWidth:'20ch',letterSpacing:'-0.02em'}}>
             If something isn't working,<br />let's figure out why.
           </p>
           <button

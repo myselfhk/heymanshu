@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 /* ─────────────────────────────────────────────────────────────────
    About Me — heymanshu
-   Background: #f5f5f5 (light) · Text: dark
+   Background: #EDE8E3 (light) · Text: dark
    ID: #team — kept for Background.jsx scroll trigger
 ─────────────────────────────────────────────────────────────────── */
 
@@ -23,7 +23,7 @@ const FACETS = [
   },
   {
     label: 'Currently',
-    content: 'Based in Jaipur, India. Open to consulting engagements and the right full-time opportunity. Building tools for The Shelf. Thinking about trust, clarity, and what makes a product feel inevitable.',
+    content: 'Based in Jaipur, India. Open to consulting engagements and the right full-time opportunity. Building tools for Shop. Thinking about trust, clarity, and what makes a product feel inevitable.',
   },
 ]
 

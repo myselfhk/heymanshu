@@ -1,0 +1,58 @@
+{
+  "id": "article",
+  "label": "Article",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": { "label": "URL Slug", "placeholder": "e.g. startup-ux-fails" }
+      },
+      "num": {
+        "type": "Text",
+        "config": { "label": "Article Number", "placeholder": "01" }
+      },
+      "tag": {
+        "type": "Text",
+        "config": { "label": "Tag", "placeholder": "Product Design" }
+      },
+      "title": {
+        "type": "Text",
+        "config": { "label": "Title" }
+      },
+      "excerpt": {
+        "type": "Text",
+        "config": { "label": "Excerpt (one sentence teaser)" }
+      },
+      "read_time": {
+        "type": "Text",
+        "config": { "label": "Read Time", "placeholder": "4 min" }
+      },
+      "date": {
+        "type": "Text",
+        "config": { "label": "Date (display format)", "placeholder": "November 2024" }
+      },
+      "sections": {
+        "type": "Group",
+        "config": {
+          "label": "Article Sections",
+          "fields": {
+            "heading": {
+              "type": "Text",
+              "config": { "label": "Section Heading (leave blank for first section)" }
+            },
+            "paragraphs": {
+              "type": "StructuredText",
+              "config": { "label": "Paragraphs", "multi": "paragraph,hyperlink,strong,em" }
+            },
+            "pull_quote": {
+              "type": "Text",
+              "config": { "label": "Pull Quote (optional)" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

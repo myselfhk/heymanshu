@@ -212,7 +212,7 @@ export default function Shelf() {
 
         {/* LEFT — section label + opener copy folded in, then product content */}
         <div className="shelf__product-content">
-          <p className="shelf__label">The Shelf</p>
+          <p className="shelf__label">Shop</p>
           <p className="shelf__opener-copy">Things I made that you can use.</p>
 
           <span className="shelf__product-num" aria-hidden="true">01</span>

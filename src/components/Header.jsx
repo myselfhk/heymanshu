@@ -3,8 +3,8 @@ import gsap from 'gsap'
 
 const navLinks = [
   { label: 'Work',       href: '#manifesto' },
-  { label: 'The Shelf',  href: '#shelf' },
-  { label: 'Narratives', href: '#narratives' },
+  { label: 'Shop',  href: '#shelf' },
+  { label: 'Narratives', href: '#Narratives' },
   { label: 'Writing',    href: '#news' },
   { label: 'About',      href: '/about' },
 ]
@@ -115,7 +115,7 @@ export default function Header({ onNotifyClick, scrollTo }) {
           top: 0,
           left: 0,
           right: 0,
-          height: 69,
+          height: 80,
           zIndex: 700,
           background: 'transparent',
         }}
@@ -156,11 +156,7 @@ export default function Header({ onNotifyClick, scrollTo }) {
               <path d="M167.264 22.6491V19.071H167.235C166.653 21.631 164.82 22.94 162.347 22.94C158.449 22.94 157.286 20.38 157.286 17.5291V9.18004H158.827V17.2382C158.827 19.3619 159.7 21.5146 162.726 21.5146C165.547 21.5146 167.264 19.9437 167.264 17.2382V9.18004H168.806V22.6491H167.264Z" fill="currentColor"/>
             </svg>
           </a>
-
-          {/* Nav + CTA RIGHT */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
-            {/* Desktop nav */}
-            <nav className="header__nav-desktop" style={{ alignItems: 'center', gap: 30 }}>
+<nav className="header__nav-desktop" style={{ alignItems: 'center', gap: 30 }}>
               <ul style={{ display: 'flex', gap: 30, alignItems: 'center' }}>
                 {navLinks.map(({ label, href }) => (
                   <li
@@ -180,6 +176,10 @@ export default function Header({ onNotifyClick, scrollTo }) {
                 ))}
               </ul>
             </nav>
+          {/* Nav + CTA RIGHT */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
+            {/* Desktop nav */}
+            
 
             {/* Desktop CTA */}
             <div className="header__pill header__pill-desktop" style={{ opacity: 0 }}>

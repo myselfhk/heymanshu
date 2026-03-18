@@ -2,62 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
+import { useShelfProducts } from '../hooks/useShelfProducts'
 import InnerHeader from '../components/InnerHeader'
 import AsidePanel from '../components/AsidePanel'
 import Footer from '../components/Footer'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const PRODUCTS = [
-  {
-    num: '01',
-    name: 'Design Audit Playbook',
-    tagline: 'For founders who need to know what\'s broken before hiring anyone.',
-    description: 'A structured 40-question framework for evaluating your product\'s UX, design system, and user flows. Built from 5 years of auditing real products across fintech, automotive, and e-commerce.',
-    included: [
-      '40 diagnostic questions across 5 categories',
-      'Severity scoring framework',
-      'Prioritisation matrix (effort vs. impact)',
-      'Annotated example audit',
-      'PDF + interactive checklist',
-    ],
-    forWho: 'Founders pre-hiring. Product managers inheriting a messy product. Designers starting a new engagement.',
-    price: 'Rs. 999',
-    meta: 'PDF + Checklist · Instant download',
-    cta: 'Get Playbook',
-    faq: [
-      { q: 'Do I need a design background to use this?', a: 'No. The questions are written for anyone who can look at a product and ask whether something feels right.' },
-      { q: 'What format is the deliverable?', a: 'A structured PDF with embedded interactive checklist. Works in Acrobat and most PDF readers.' },
-      { q: 'Can I use this for client work?', a: 'Yes, single-use commercial license included. For agency use (multiple clients), contact me.' },
-    ],
-    cardBg: 'linear-gradient(135deg, #0D1B2A 0%, #0A2A3A 100%)',
-    accentColor: '#0A6B6B',
-  },
-  {
-    num: '02',
-    name: 'Fintech UI Kit',
-    tagline: 'Built from 5 years inside Paytm, Creditas & Woo. Real patterns, not templates.',
-    description: 'A comprehensive Figma component library covering the most common fintech UI patterns: payment flows, transaction history, onboarding, KYC, account management, and more.',
-    included: [
-      '200+ production-ready components',
-      'Complete design token system',
-      'Mobile and desktop variants',
-      'Dark and light modes',
-      'Figma source file with free updates',
-    ],
-    forWho: 'Product designers working in fintech. Founders building financial products. Design teams looking for a solid starting point.',
-    price: 'Rs. 2,999',
-    meta: 'Figma file · Free updates',
-    cta: 'Get Kit',
-    faq: [
-      { q: 'Which version of Figma is required?', a: 'Figma 2024+ (uses variables for tokens). Works with free and paid Figma plans.' },
-      { q: 'Are the components accessible?', a: 'WCAG 2.1 AA compliant colour contrast throughout. Keyboard navigation patterns included.' },
-      { q: 'Does this cover crypto / web3?', a: 'Primarily traditional fintech (payments, lending, savings). Some patterns apply to crypto but it\'s not the focus.' },
-    ],
-    cardBg: 'linear-gradient(135deg, #1A1205 0%, #241808 100%)',
-    accentColor: '#B8973C',
-  },
-]
 
 /* Accordion item */
 function FaqItem({ q, a }) {
@@ -89,6 +39,7 @@ export default function ShelfPage() {
   const [panelOpen, setPanelOpen] = useState(false)
   const lenisRef = useRef(null)
   const pageRef = useRef(null)
+  const { data: products } = useShelfProducts()
 
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
@@ -123,17 +74,17 @@ export default function ShelfPage() {
   }, [panelOpen])
 
   return (
-    <div ref={pageRef} style={{ background:'#F7F4EF', minHeight:'100vh', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
+    <div ref={pageRef} style={{ background:'#EDE8E3', minHeight:'100vh', fontFamily:"var(--font-base)", overflowX:'hidden' }}>
       {/* Darker header for shelf (light bg) */}
-      <div style={{ background:'#F7F4EF' }}>
+      <div style={{ background:'#EDE8E3' }}>
         <InnerHeader onNotifyClick={() => setPanelOpen(true)} />
       </div>
       <AsidePanel open={panelOpen} onClose={() => setPanelOpen(false)} />
 
       {/* ── HEADER ── */}
       <div style={{ padding:'160px 80px 64px', borderBottom:'1px solid rgba(0,0,0,0.06)' }}>
-        <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(0,0,0,0.3)',marginBottom:16}}>The Shelf</div>
-        <h1 style={{fontFamily:"var(--font-base)",fontSize:'clamp(48px,6vw,80px)',fontWeight:300,lineHeight:0.95,letterSpacing:'-0.03em',color:'#0E0E0E',marginBottom:20}}>
+        <div style={{fontFamily:"var(--font-base)",fontSize:11,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(0,0,0,0.3)',marginBottom:16}}>Shop</div>
+        <h1 style={{fontFamily:"var(--font-base)",fontSize:'clamp(48px,6vw,80px)',fontWeight:300,lineHeight:0.95,letterSpacing:'-0.03em',color:'#1B1B1F',marginBottom:20}}>
           Things I made<br /><em>that you can use.</em>
         </h1>
         <p style={{fontFamily:"var(--font-base)",fontSize:16,fontWeight:300,color:'rgba(0,0,0,0.45)',maxWidth:'48ch',lineHeight:1.7}}>
@@ -142,7 +93,7 @@ export default function ShelfPage() {
       </div>
 
       {/* ── PRODUCTS ── */}
-      {PRODUCTS.map((product, i) => (
+      {(products ?? []).map((product, i) => (
         <div
           key={i}
           className="shelf-page__product"
@@ -171,7 +122,7 @@ export default function ShelfPage() {
           {/* Product text */}
           <div>
             <span style={{fontFamily:"var(--font-base)",fontSize:10,fontWeight:600,letterSpacing:'0.16em',textTransform:'uppercase',color:'rgba(0,0,0,0.3)'}}>{product.num}</span>
-            <h2 style={{fontFamily:"var(--font-base)",fontSize:'clamp(28px,3vw,44px)',fontWeight:300,lineHeight:1.1,color:'#0E0E0E',margin:'12px 0 16px',letterSpacing:'-0.02em'}}>{product.name}</h2>
+            <h2 style={{fontFamily:"var(--font-base)",fontSize:'clamp(28px,3vw,44px)',fontWeight:300,lineHeight:1.1,color:'#1B1B1F',margin:'12px 0 16px',letterSpacing:'-0.02em'}}>{product.name}</h2>
             <p style={{fontFamily:"var(--font-base)",fontSize:16,fontWeight:300,color:'rgba(0,0,0,0.55)',lineHeight:1.7,marginBottom:32,maxWidth:'52ch'}}>{product.description}</p>
 
             {/* What's included */}
@@ -180,7 +131,7 @@ export default function ShelfPage() {
               <ul style={{listStyle:'none',padding:0,display:'flex',flexDirection:'column',gap:8}}>
                 {product.included.map((item, j) => (
                   <li key={j} style={{fontFamily:"var(--font-base)",fontSize:14,color:'rgba(0,0,0,0.6)',display:'flex',gap:10,alignItems:'flex-start'}}>
-                    <span style={{color:'#B8973C',fontSize:12,marginTop:2,flexShrink:0}}>◆</span>
+                    <span style={{color:'#C2A661',fontSize:12,marginTop:2,flexShrink:0}}>◆</span>
                     {item}
                   </li>
                 ))}
@@ -205,7 +156,7 @@ export default function ShelfPage() {
                 <span className="btn__text">{product.cta}</span>
                 <span className="btn__arrow">→</span>
               </a>
-              <span style={{fontFamily:"var(--font-base)",fontSize:15,fontWeight:500,color:'#0E0E0E'}}>{product.price}</span>
+              <span style={{fontFamily:"var(--font-base)",fontSize:15,fontWeight:500,color:'#1B1B1F'}}>{product.price}</span>
             </div>
           </div>
 

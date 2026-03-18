@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 /* ─────────────────────────────────────────────────────────────────
    Writing — heymanshu
-   Background: #161616 (dark) · Text: white / muted
+   Background: #1B1B1F (dark) · Text: white / muted
    ID: #news — kept for Background.jsx scroll trigger
 ─────────────────────────────────────────────────────────────────── */
 

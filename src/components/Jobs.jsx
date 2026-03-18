@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 /* ─────────────────────────────────────────────────────────────────
    Experience — heymanshu
-   Background: #f5f5f5 (light) · Text: dark
+   Background: #EDE8E3 (light) · Text: dark
    ID: #jobs — kept for Background.jsx scroll trigger
 ─────────────────────────────────────────────────────────────────── */
 

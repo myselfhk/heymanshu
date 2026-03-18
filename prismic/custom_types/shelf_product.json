@@ -1,0 +1,73 @@
+{
+  "id": "shelf_product",
+  "label": "Shelf Product",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": { "label": "URL Slug", "placeholder": "design-audit-playbook" }
+      },
+      "num": {
+        "type": "Text",
+        "config": { "label": "Display Number", "placeholder": "01" }
+      },
+      "name": {
+        "type": "Text",
+        "config": { "label": "Product Name" }
+      },
+      "tagline": {
+        "type": "Text",
+        "config": { "label": "Tagline (one sentence)" }
+      },
+      "description": {
+        "type": "Text",
+        "config": { "label": "Description paragraph" }
+      },
+      "included": {
+        "type": "Group",
+        "config": {
+          "label": "What's Included",
+          "fields": {
+            "item": { "type": "Text", "config": { "label": "Included item" } }
+          }
+        }
+      },
+      "for_who": {
+        "type": "Text",
+        "config": { "label": "Who It's For" }
+      },
+      "price": {
+        "type": "Text",
+        "config": { "label": "Price", "placeholder": "Rs. 999" }
+      },
+      "meta": {
+        "type": "Text",
+        "config": { "label": "Meta line", "placeholder": "PDF + Checklist · Instant download" }
+      },
+      "cta": {
+        "type": "Text",
+        "config": { "label": "CTA Button Text", "placeholder": "Get Playbook" }
+      },
+      "faq": {
+        "type": "Group",
+        "config": {
+          "label": "FAQ",
+          "fields": {
+            "question": { "type": "Text", "config": { "label": "Question" } },
+            "answer": { "type": "Text", "config": { "label": "Answer" } }
+          }
+        }
+      },
+      "card_bg": {
+        "type": "Text",
+        "config": { "label": "Card Background (CSS gradient)", "placeholder": "linear-gradient(135deg, #0D1B2A 0%, #0A2A3A 100%)" }
+      },
+      "accent_color": {
+        "type": "Text",
+        "config": { "label": "Accent Color (hex)", "placeholder": "#056B73" }
+      }
+    }
+  }
+}

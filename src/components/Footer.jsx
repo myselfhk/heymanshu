@@ -12,8 +12,8 @@ export default function Footer({ onNotifyClick, scrollTo }) {
       {/* Left: nav links */}
       <nav className="footer-strip__nav">
         <a href="/#manifesto"  className="footer-strip__nav-link" onClick={nav('/#manifesto', '#manifesto')}>Work</a>
-        <a href="/#shelf"      className="footer-strip__nav-link" onClick={nav('/#shelf', '#shelf')}>The Shelf</a>
-        <a href="/#narratives" className="footer-strip__nav-link" onClick={nav('/#narratives', '#narratives')}>Narratives</a>
+        <a href="/#shelf"      className="footer-strip__nav-link" onClick={nav('/#shelf', '#shelf')}>Shop</a>
+        <a href="/#Narratives" className="footer-strip__nav-link" onClick={nav('/#Narratives', '#Narratives')}>Narratives</a>
         <a href="/about"       className="footer-strip__nav-link">About</a>
       </nav>
 

@@ -81,7 +81,7 @@ export default function CustomCursor() {
       ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`
 
       // Colour
-      const color = isDark ? '#ffffff' : '#0E0E0E'
+      const color = isDark ? '#ffffff' : '#1B1B1F'
       dot.style.background  = color
       ring.style.borderColor = color
       if (label) label.style.color = color
