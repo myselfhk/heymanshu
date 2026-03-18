@@ -264,7 +264,7 @@ export default function Hero({ scrollTo, loading, lockScroll, unlockScroll, onNo
           }}
         >
           <p className="hero-tagline">
-            I'm Himanshu, a designer who helps founders craft beautiful things. 
+            I'm Himanshu, a designer who helps companies craft beautiful things. 
           </p>
           <a
             href="#manifesto"
